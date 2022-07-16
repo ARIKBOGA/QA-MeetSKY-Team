@@ -1,11 +1,11 @@
 package com.meetsky.step_definitions;
 
 import com.meetsky.pages.ContactsPage;
-import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -25,34 +25,38 @@ public class Contacts_StepDefinition {
     @Given("User selects all properties to fill out")
     public void user_selects_all_properties_to_fill_out() {
 
-        selectUnselectedInputs(contactsPage.presentInputs, contactsPage.propertiesToBeSelected);
-
-        contactsPage.propertiesMenuLink.click();
-
-        contactsPage.propertiesToBeSelected.forEach(element -> System.out.println(element.getAttribute("title")));
+        selectUnselectedInputs();
 
     }
 
-    private static void selectUnselectedInputs(List<WebElement> alreadySelected, List<WebElement> toBeSelected) {
+    private static void selectUnselectedInputs() {
 
-        List<String> textOfAlreadySelected = alreadySelected
+        // find unselected inputs for info of new contact and get them into a list of String
+        List<String> willClicked = new ArrayList<>(List.copyOf(contactsPage.propertiesToBeSelected
                 .stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
+                .filter(element ->
+                        !contactsPage.presentInputs
+                                .stream()
+                                .map(WebElement::getText)
+                                .collect(Collectors.toList())
+                                .contains(element.getAttribute("title")))
+                .map(element -> element.getAttribute("title"))
+                .collect(Collectors.toList())));
 
-        System.out.println(textOfAlreadySelected);
-        System.out.println(toBeSelected.stream().map(p -> p.getAttribute("title")).collect(Collectors.toList()));
-
-        List<WebElement> loopList = new ArrayList<>(toBeSelected);
-
-        loopList.stream()
-                .filter(element -> !textOfAlreadySelected.contains(element.getAttribute("title")))
-                .forEach(element -> {
+        // click to every unselected element.
+        // We use nested loop and an independent string list to manipulate it during loop to be able to avoid jump one element without clicking.
+        // Once we click an element from the list it is getting removed from the list. So, the list is dynamic.
+        for (String s : willClicked) {
+            for (WebElement element : contactsPage.propertiesToBeSelected) {
+                if (element.getAttribute("title").equals(s)) {
+                    wait.until(ExpectedConditions.elementToBeClickable(contactsPage.propertiesMenuLink));
                     contactsPage.propertiesMenuLink.click();
-                    BrowserUtils.waitFor(2);
+                    wait.until(ExpectedConditions.elementToBeClickable(element));
                     element.click();
-                    System.out.println(element.getAttribute("title"));
-                });
+                    break;
+                }
+            }
+        }
 
     }
 }
