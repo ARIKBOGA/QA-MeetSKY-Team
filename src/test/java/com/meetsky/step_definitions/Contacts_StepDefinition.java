@@ -22,11 +22,9 @@ public class Contacts_StepDefinition {
         contactsPage.contactsPageLink.click();
     }
 
-    @Given("User selects all properties to fill out")
-    public void user_selects_all_properties_to_fill_out() {
-
+    @Given("User fills all properties out")
+    public void userFillsAllPropertiesOut() {
         selectUnselectedInputs();
-
     }
 
     private static void selectUnselectedInputs() {
