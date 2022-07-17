@@ -1,6 +1,7 @@
 package com.meetsky.step_definitions;
 
 import com.meetsky.pages.ContactsPage;
+import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -33,11 +34,10 @@ public class Contacts_StepDefinition {
         List<String> willClicked = new ArrayList<>(List.copyOf(contactsPage.propertiesToBeSelected
                 .stream()
                 .filter(element ->
-                        !contactsPage.presentInputs
-                                .stream()
-                                .map(WebElement::getText)
-                                .collect(Collectors.toList())
-                                .contains(element.getAttribute("title")))
+                        !BrowserUtils
+                                .getElementsText(contactsPage.presentInputs)
+                                .contains(element.getAttribute("title"))
+                )
                 .map(element -> element.getAttribute("title"))
                 .collect(Collectors.toList())));
 
