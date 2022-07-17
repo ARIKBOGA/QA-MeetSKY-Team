@@ -7,22 +7,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Making abstract this class and implementing encapsulation, so we are closing
- * access to the object of this class from outside the class
- */
+    /**
+    Making abstract this class and implementing encapsulation, so we are closing
+    access to the object of this class from outside the class
+     */
 public abstract class Driver {
 
     /**
-     * We make WebDriver private, because we want to close access from outside the class.
-     * We make it static because we will use it in a static method.
+    We make WebDriver private, because we want to close access from outside the class.
+    We make it static because we will use it in a static method.
      */
     //private static WebDriver driver; // value is null by default
 
     private static InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
     /**
-     * Create a re-usable utility method which will return same driver instance when we call it
+    Create a re-usable utility method which will return same driver instance when we call it
      */
     public static WebDriver getDriver() {
 
@@ -58,7 +58,7 @@ public abstract class Driver {
     }
 
     /**
-     * This method will make sure our driver value is always null after using quit() method
+    This method will make sure our driver value is always null after using quit() method
      */
     public static void closeDriver() {
         if (driverPool.get() != null) {

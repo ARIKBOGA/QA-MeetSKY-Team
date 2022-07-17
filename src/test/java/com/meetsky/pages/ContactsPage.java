@@ -12,7 +12,7 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Create contact')]")
     public WebElement createContactButton;
 
-    @FindBy(xpath = "//div[@class='action-item header-menu']//button")
+    @FindBy(xpath ="//div[@class='action-item header-menu']//button")
     public WebElement threeDotsMenuButton;
 
     @FindBy(xpath = "//button[@class='icon action-item__menutoggle icon-picture-force-white']")
@@ -138,6 +138,7 @@ public class ContactsPage extends BasePage {
 
     @FindBy(xpath = "//div[contains(text(),'Groups')]/..//span[@class='multiselect__tag']/span")
     public List<WebElement> selectedGroups; // use getText()
+
 
 
     //div[contains(text(),'Timezone')]/../following-sibling::div//input

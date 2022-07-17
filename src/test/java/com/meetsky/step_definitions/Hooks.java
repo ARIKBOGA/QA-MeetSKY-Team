@@ -1,5 +1,6 @@
 package com.meetsky.step_definitions;
 
+import com.google.common.io.Files;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -7,6 +8,7 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Hooks {
