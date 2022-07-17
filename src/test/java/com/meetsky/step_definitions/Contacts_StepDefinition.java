@@ -17,16 +17,6 @@ public class Contacts_StepDefinition {
     private static ContactsPage contactsPage = new ContactsPage();
     private static WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
-    @Then("User goes to Contacts page")
-    public void user_goes_to_page() {
-        contactsPage.contactsPageLink.click();
-    }
-
-    @Given("User fills all properties out")
-    public void userFillsAllPropertiesOut() {
-        selectUnselectedInputs();
-    }
-
     private static void selectUnselectedInputs() {
 
         // find unselected inputs for info of new contact and get them into a list of String
@@ -56,5 +46,15 @@ public class Contacts_StepDefinition {
             }
         }
 
+    }
+
+    @Then("User goes to Contacts page")
+    public void user_goes_to_page() {
+        contactsPage.contactsPageLink.click();
+    }
+
+    @Given("User fills all properties out")
+    public void userFillsAllPropertiesOut() {
+        selectUnselectedInputs();
     }
 }

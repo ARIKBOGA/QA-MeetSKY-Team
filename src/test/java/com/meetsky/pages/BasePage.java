@@ -74,7 +74,7 @@ public class BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    public void logout(){
+    public void logout() {
         topRightSettingsExpandButton.click();
         accountMenuLogoutButton.click();
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().startsWith(ConfigurationReader.getProperty("login_page_url")));
