@@ -186,11 +186,9 @@ public class BrowserUtils {
      * @return list of string
      */
     public static List<String> getElementsText(List<WebElement> list) {
-        List<String> elemTexts = new ArrayList<>();
-        for (WebElement el : list) {
-            elemTexts.add(el.getText());
-        }
-        return elemTexts;
+        return list.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -200,14 +198,9 @@ public class BrowserUtils {
      * @return list of strings
      */
     public static List<String> getElementsText(By locator) {
-
-        List<WebElement> elems = Driver.getDriver().findElements(locator);
-        List<String> elemTexts = new ArrayList<>();
-
-        for (WebElement el : elems) {
-            elemTexts.add(el.getText());
-        }
-        return elemTexts;
+        return Driver.getDriver().findElements(locator).stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 
     /**
