@@ -26,16 +26,16 @@ Feature: As a user, I should be able to add a file to favorites, rename any file
 #User can put some comments on any file from the file details menu opened right side
 
   Scenario: User can put some comments on any file from the file details menu opened right side
-    And user click on the three dots next to any file
+    And user clicks on the three dots next to any file
     And user clicks on Details button
     And user clicks on Comments button
     And user clicks on text filed and types some comments and press enters key
-    Then user can see the comment is posted
+    Then user can see that the comment is posted
 
 # User can delete the comments made on any file from the the file details menu opened rigth side
 
   Scenario: User can delete the comments made on any file from the the file details menu opened rigth side
-    And user click on the three dots just above the comment
+    And user clicks on the three dots just above the comment
     And user clicks on Details button
     And user clicks on Comments button
     And user clicks on "Delete comment" button
