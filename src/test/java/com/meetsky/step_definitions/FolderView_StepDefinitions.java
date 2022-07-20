@@ -1,7 +1,6 @@
 package com.meetsky.step_definitions;
 
 import com.meetsky.pages.FilesPage;
-import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,20 +12,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FolderView_StepDefinitions {
+    List<Integer> SizeListBeforeClick = new ArrayList<>();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
     Actions actions = new Actions(Driver.getDriver());
 
     FilesPage filesPage = new FilesPage();
-
-    List<String> expectedFoldersNameList = new ArrayList<>();
-    List<String> expectedFilesNameList = new ArrayList<>();
-    List<String> expectedFullFilesAndFoldersTogether = new ArrayList<>();
-
-
-    List<String> ActualNamesList = new ArrayList<>();
 
     @Given("User clicks Name link")
     public void user_clicks_name_link() {
@@ -39,6 +31,10 @@ public class FolderView_StepDefinitions {
 
     @Then("User sees Files and Folders in an order according to their Names")
     public void userSeesFilesAndFoldersInAnOrderAccordingToTheirNames() {
+        List<String> expectedFoldersNameList = new ArrayList<>();
+        List<String> expectedFilesNameList = new ArrayList<>();
+        List<String> expectedList;
+        List<String> ActualNamesList = new ArrayList<>();
         String sortingIndicator = filesPage.sortingTick.getAttribute("class");
         System.out.println("sortingIndicator = " + sortingIndicator);
 
@@ -47,7 +43,7 @@ public class FolderView_StepDefinitions {
         actions.moveToElement(filesPage.summary).perform();
 
 
-        if (sortingIndicator.endsWith("-n")) {// -n  indicate it is ascending  else descending
+        if (sortingIndicator.endsWith("-n")) {// -n  indicates it is ascending , else descending
             for (WebElement webElement : filesPage.foldersNameList) {
                 expectedFoldersNameList.add(webElement.getAttribute("data-file").toLowerCase(Locale.ROOT));
             }
@@ -58,7 +54,7 @@ public class FolderView_StepDefinitions {
             Collections.sort(expectedFilesNameList);
             expectedFoldersNameList.addAll(expectedFilesNameList);
 
-            expectedFullFilesAndFoldersTogether = expectedFoldersNameList;
+            expectedList = expectedFoldersNameList;
 
 
         } else {
@@ -70,17 +66,65 @@ public class FolderView_StepDefinitions {
             for (WebElement webElement : filesPage.foldersNameList) {
                 expectedFoldersNameList.add(webElement.getAttribute("data-file").toLowerCase(Locale.ROOT));
             }
-            Collections.reverse(expectedFoldersNameList.stream().sorted().collect(Collectors.toList()));
+            expectedFoldersNameList= expectedFoldersNameList.stream().sorted().collect(Collectors.toList());
+            Collections.reverse(expectedFoldersNameList);
             expectedFilesNameList.addAll(expectedFoldersNameList);
-            expectedFullFilesAndFoldersTogether=expectedFilesNameList;
+            expectedList = expectedFilesNameList;
         }
 
         for (WebElement webElement : filesPage.filesAndFoldersNameList) {
             ActualNamesList.add(webElement.getAttribute("data-file").toLowerCase(Locale.ROOT));
         }
         System.out.println("ActualNamesList = " + ActualNamesList);
-        System.out.println("expectedFullFilesAndFoldersTogether = " + expectedFullFilesAndFoldersTogether);
-        Assert.assertEquals(ActualNamesList,expectedFullFilesAndFoldersTogether);
+        System.out.println("expectedFullFilesAndFoldersTogether = " + expectedList);
+        Assert.assertEquals(ActualNamesList, expectedList);
+
+
+    }
+
+    @Given("User clicks Size link")
+    public void userClicksSizeLink() {
+
+        wait.until(ExpectedConditions.visibilityOf(filesPage.summary));
+
+        actions.moveToElement(filesPage.summary).perform();
+        for (WebElement webElement : filesPage.sizeList) {
+            SizeListBeforeClick.add(Integer.valueOf(webElement.getText().replaceAll("[^0-9]", "")));
+        }
+        System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
+        filesPage.sizeText.click();
+    }
+
+    @Then("User sees Files and Folders in an order according to their Size")
+    public void userSeesFilesAndFoldersInAnOrderAccordingToTheirSize() {
+        wait.until(ExpectedConditions.visibilityOf(filesPage.summary));
+
+        actions.moveToElement(filesPage.summary).perform();
+
+        String sortingIndicator = filesPage.sortingTick.getAttribute("class");
+        System.out.println("sortingIndicator = " + sortingIndicator);
+
+        List<Integer> sizeListAfterClick = new ArrayList<>();
+        for (WebElement webElement : filesPage.sizeList) {
+           sizeListAfterClick.add(Integer.valueOf(webElement.getText().replaceAll("[^0-9]", ""))) ;
+        }
+
+        if (sortingIndicator.endsWith("-n")) {
+           Collections.sort(SizeListBeforeClick);
+
+            System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
+            System.out.println("sizeListAfterClick = " + sizeListAfterClick);
+            Assert.assertEquals(SizeListBeforeClick,sizeListAfterClick);
+
+        } else {
+          SizeListBeforeClick = SizeListBeforeClick.stream().sorted().collect(Collectors.toList());
+            Collections.reverse(SizeListBeforeClick);
+
+            System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
+            System.out.println("sizeListAfterClick = " + sizeListAfterClick);
+
+            Assert.assertEquals(SizeListBeforeClick,sizeListAfterClick);
+        }
 
 
     }

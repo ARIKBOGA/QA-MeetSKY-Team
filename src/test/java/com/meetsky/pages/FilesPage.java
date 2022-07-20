@@ -21,6 +21,8 @@ public class FilesPage {
 
 
 
+
+
     @FindBy(xpath = "//span[contains(@class,\"sort-indicator icon-triangle-\")]/../span")
     public WebElement sortingType;
 
@@ -40,14 +42,22 @@ public class FilesPage {
     @FindBy(xpath = "//tr[@data-id and @data-type=\"dir\"]")
     public List<WebElement> foldersNameList;
 
-    @FindBy(xpath = "//tr[@data-id]")
-    public List<WebElement> filesAndFoldersNameList;
+
 
     @FindBy(xpath = "//td[@class=\"filesummary\"]")
     public WebElement summary;
 
     @FindBy(xpath = "//tr[@data-id][last()]")
     public WebElement filesAndFoldersLastItemName;
+
+    @FindBy(xpath = "//tr[@data-id]")
+    public List<WebElement> filesAndFoldersNameList;
+    @FindBy(xpath = "//tbody[@id=\"fileList\"]//td[@class=\"filesize\"]")
+    public List<WebElement> sizeList;
+
+    @FindBy(xpath = "//td[@class=\"date\"]/span[contains(@data-original-title,\"\")]")
+    public List<WebElement> modifiedTimeList;
+
 
 
 
