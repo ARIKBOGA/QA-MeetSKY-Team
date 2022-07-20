@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CalendarPage {
+public class CalendarPage extends BasePage{
 
 
     @FindBy(xpath="//button[@class='button primary new-event']")
