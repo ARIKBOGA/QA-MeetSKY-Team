@@ -1,7 +1,6 @@
 package com.meetsky.step_definitions;
 
 import com.github.javafaker.Faker;
-import com.google.common.collect.FluentIterable;
 import com.meetsky.pages.BasePage;
 import com.meetsky.pages.FilesFavoritesPage;
 import com.meetsky.pages.FilesPage;
@@ -12,15 +11,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.lang.module.Configuration;
-import java.util.List;
 
 public class FilesStepDefinitions {
     LoginPage loginPage = new LoginPage();
@@ -61,16 +53,16 @@ public class FilesStepDefinitions {
     }
 
 
-    @And("user clicks on Rename button and rename the file as {string} and see the new name")
-    public void userClicksOnRenameButtonAndRenameTheFileAsAndSeeTheNewName(String arg0) {
-
+    @And("user clicks on Rename button and rename the file as and see the new name")
+    public void userClicksOnRenameButtonAndRenameTheFileAsAndSeeTheNewName() {
         Faker faker = new Faker();
-        arg0 = faker.name().fullName();
+        String arg0 = faker.name().fullName();
         filesFavoritesPage.reName.click();
         Actions actions = new Actions(Driver.getDriver());
         actions.sendKeys(arg0 + Keys.ENTER).perform();
         String rename = filesFavoritesPage.fileName.getText();
-        Assert.assertEquals(rename.contains(arg0), true);
+        Assert.assertTrue(rename.contains(arg0));
+
     }
 
     @And("user click on the three dots next to any file in the FavPage")
@@ -82,7 +74,7 @@ public class FilesStepDefinitions {
     @Then("user can see the file name as {string}")
     public void userCanSeeTheFileNameAs(String arg0) {
         String rename = filesFavoritesPage.fileName.getText();
-        Assert.assertEquals(rename.contains(arg0), true);
+        Assert.assertTrue(rename.contains(arg0));
     }
 
     @And("user clicks on Details button")
@@ -151,6 +143,7 @@ public class FilesStepDefinitions {
     public void userClickOnTheThreeDotsToRemoveFromFavorites() {
         filesFavoritesPage.threeDotToToMoveComment.click();
     }
+
 
 }
 
