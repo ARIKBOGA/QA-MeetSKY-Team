@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,24 +39,21 @@ public class Contacts_StepDefinition {
     }
 
 
-    @And("User fills {string} {string} {string} {string} {string} {string} {string} {string} {string} properties out")
-    public void userFillsPropertiesOut(String fullname, String company, String title, String phone, String email, String birthday, String gender, String city, String country) {
+    @And("User fills {string} {string} {string} {string} {string} {string} {string} properties out")
+    public void userFillsPropertiesOut(String fullname, String company, String title, String phone, String email, String city, String country) {
+
         selectUnselectedInputs();
+
         wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
+        contactsPage.newContactFullnameInput.clear();
         contactsPage.newContactFullnameInput.sendKeys(fullname);
         contactsPage.companyInput.sendKeys(company);
         contactsPage.titleInput.sendKeys(title);
-        contactsPage.phoneTypeMenuLink.click();
-        contactsPage.phoneTypeOptions.get(new Random().nextInt(12)).click();
         contactsPage.phoneInput.sendKeys(phone);
-        contactsPage.emailTypeMenuLink.click();
-        contactsPage.emailTypeOptions.get(new Random().nextInt(3)).click();
         contactsPage.emailInput.sendKeys(email);
-        contactsPage.birthdayDateInput.sendKeys(birthday);
-        contactsPage.genderMenuLink.click();
-        contactsPage.genderOptions.get(gender.equals("Female") ? 0 : 1).click();
         contactsPage.cityInput.sendKeys(city);
         contactsPage.countryInput.sendKeys(country);
+        BrowserUtils.waitFor(2);
     }
 
     private static void selectUnselectedInputs() {
@@ -92,6 +90,7 @@ public class Contacts_StepDefinition {
     public void userClicksToLink() {
         totalContacts = contactsPage.contactsInTheMiddleColumn.size();
         contactsPage.allContactsLink.click();
+        BrowserUtils.waitFor(3);
     }
 
     @Then("User should be able to see all contacts in the middle column")
@@ -110,6 +109,7 @@ public class Contacts_StepDefinition {
 
     @And("User clicks to a random contact in the middle column")
     public void userClicksToARandomContactInTheMiddleColumn() {
+        totalContacts = contactsPage.contactsInTheMiddleColumn.size();
         contactWillBeDeleted = contactsPage.contactsInTheMiddleColumn
                 .get(new Random().nextInt(contactsPage.contactsInTheMiddleColumn.size()));
         totalContacts = contactsPage.contactsInTheMiddleColumn.size();
@@ -138,9 +138,8 @@ public class Contacts_StepDefinition {
 
     @Then("User should be able to see the PP has been changed")
     public void userShouldBeAbleToSeeThePPHasBeenChanged() {
+        Assert.assertTrue(contactsPage.profilePicture.isEnabled());
         contactsPage.profilePicture.click();
-        wait.until(ExpectedConditions.visibilityOf(contactsPage.expandedProfilePicture));
-        Assert.assertTrue(contactsPage.expandedProfilePicture.isDisplayed());
     }
 
     @And("User clicks to Three dot menu link")
@@ -155,7 +154,9 @@ public class Contacts_StepDefinition {
 
     @Then("User should be able to see the contact has been deleted")
     public void userShouldBeAbleToSeeTheContactHasBeenDeleted() {
-        Assert.assertFalse(contactsPage.contactsInTheMiddleColumn.contains(contactWillBeDeleted));
-        Assert.assertEquals(totalContacts - 1, contactsPage.contactsInTheMiddleColumn.size());
+        BrowserUtils.waitFor(3);
+        Assert.assertEquals(totalContacts - 1,
+                Driver.getDriver().findElements(By.xpath("//div[@class='vue-recycle-scroller__item-view']"))
+                        .size() - 1);
     }
 }

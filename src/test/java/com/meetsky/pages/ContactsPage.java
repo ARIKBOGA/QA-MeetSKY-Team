@@ -193,7 +193,7 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath ="//div[@class='action-item header-menu']//button")
     public WebElement threeDotsMenuButton;
 
-    @FindBy(xpath = "//ul[@id='menu-xmfep']/li[3]")
+    @FindBy(xpath = "//div[@class='popover vue-popover-theme open']//li[3]")
     public WebElement deleteContactButton;
 
 

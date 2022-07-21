@@ -9,11 +9,11 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
   @MTSK-487 @Smoke
   Scenario Outline: User can create a new contact with all properties filled with valid inputs
     Given User clicks to new contact button
-    And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<Birthday>" "<Gender>" "<City>" "<Country>" properties out
+    And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<City>" "<Country>" properties out
+    Then User clicks to All contacts link
     Examples:
-      | Full name     | Company  | Title   | Phone      | Email             | Birthday      | Gender | City     | Country |
-      | Didier Drogba | Cydeo    | QA      | 8764756387 | ddrogba@gmail.com | July 20, 1980 | Male   | London   | England |
-      | Muhtar Java   | Cybertek | Teacher | 3232437661 | mjava@gmail.com   | Feb 16, 1989  | Male   | Istanbul | Turkey  |
+      | Full name     | Company | Title | Phone      | Email             | City   | Country |
+      | Didier Drogba | Cydeo   | QA    | 8764756387 | ddrogba@gmail.com | London | England |
 
   @MTSK-488
   Scenario: User can see all the contacts as a list inside the middle column and

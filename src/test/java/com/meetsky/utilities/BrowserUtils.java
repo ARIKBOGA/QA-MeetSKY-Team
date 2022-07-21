@@ -306,7 +306,6 @@ public interface BrowserUtils {
             Assert.assertFalse("Element should not be visible: " + by, Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-
         }
     }
 
