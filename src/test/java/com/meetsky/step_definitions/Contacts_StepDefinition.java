@@ -3,14 +3,12 @@ package com.meetsky.step_definitions;
 import com.meetsky.pages.ContactsPage;
 import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.Driver;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchFrameException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -170,7 +168,8 @@ public class Contacts_StepDefinition {
     }
 
     @And("User fills these properties out")
-    public void userFillsThesePropertiesOut(Map<String, String> inputMap) {
+    public void userFillsThesePropertiesOut(DataTable table) {
+        Map<String, String> inputMap = table.asMap();
         selectUnselectedInputs();
         newContactName = inputMap.get("Fullname");
         wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
@@ -187,14 +186,15 @@ public class Contacts_StepDefinition {
 
     @Then("User should see warning message")
     public void userShouldSeeWarningMessage() {
-        try {
-            Assert.assertThrows(NoSuchFrameException.class, () -> {
-                Driver.getDriver().switchTo().alert().getText();
-            });
-
-        } catch (NoSuchFrameException e) {
-            e.printStackTrace();
+        try{
+            Driver.getDriver().switchTo().alert().getText();
+        }catch (NoAlertPresentException e){
+            Assert.fail("NoAlertPresentException is thrown. There is no alert message to warn");
         }
+
+        // assertThrows() sample using
+        //Assert.assertThrows(NoAlertPresentException.class, () -> Driver.getDriver().switchTo().alert().getText());
+
     }
 
     @Then("User shouldn't be able to see new created contact")

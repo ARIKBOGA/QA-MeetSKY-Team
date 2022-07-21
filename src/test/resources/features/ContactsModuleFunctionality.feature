@@ -53,6 +53,6 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
       | Phone    | dgbs*&gbdg |
       | Email    | Edfbb4-+   |
       | City     | 345:&      |
-      | City     | %*-3"      |
+      | Country  | %*-3"      |
     Then User should see warning message
     Then User shouldn't be able to see new created contact
