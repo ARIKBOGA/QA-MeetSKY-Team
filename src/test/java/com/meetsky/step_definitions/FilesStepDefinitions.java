@@ -2,8 +2,8 @@ package com.meetsky.step_definitions;
 
 import com.github.javafaker.Faker;
 import com.meetsky.pages.BasePage;
-import com.meetsky.pages.FilesFavoritesPage;
-import com.meetsky.pages.FilesPage;
+import com.meetsky.pages.FilesFavoritesRenameCommentPage;
+import com.meetsky.pages.FilesBasePage;
 import com.meetsky.pages.LoginPage;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
@@ -16,9 +16,9 @@ import org.openqa.selenium.interactions.Actions;
 
 public class FilesStepDefinitions {
     LoginPage loginPage = new LoginPage();
-    FilesPage filesPage = new FilesPage();
+    FilesBasePage filesPage = new FilesBasePage();
     BasePage basePage = new BasePage();
-    FilesFavoritesPage filesFavoritesPage = new FilesFavoritesPage();
+    FilesFavoritesRenameCommentPage filesFavoritesPage = new FilesFavoritesRenameCommentPage();
 
     @And("user click on the three dots next to chosen file")
     public void userClickOnTheThreeDotsNextToChosenFile() {

@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class FilesPage {
+public class FilesBasePage {
 
-    public FilesPage() {
+    public FilesBasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
