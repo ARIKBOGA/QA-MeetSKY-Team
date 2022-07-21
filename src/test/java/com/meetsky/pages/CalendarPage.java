@@ -23,6 +23,16 @@ public class CalendarPage extends BasePage{
     @FindBy(xpath="(//ul[@id='menu-moilt']//button)[3]")
     public WebElement MonthlyActionButton;
 
+    @FindBy(xpath="//div[@class='fc-timegrid fc-timeGridDay-view fc-view']")
+    public WebElement DailyCalendarView;
+
+    @FindBy(xpath="//div[@class='fc-timegrid fc-timeGridWeek-view fc-view']")
+    public WebElement WeeklyCalendarView;
+
+    @FindBy(xpath="//div[@class='fc-daygrid fc-dayGridMonth-view fc-view']")
+    public WebElement MonthlyCalendarView;
+
+
 
 
 

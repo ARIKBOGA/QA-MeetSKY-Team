@@ -4,6 +4,7 @@ import com.meetsky.pages.CalendarPage;
 import com.meetsky.pages.LoginPage;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,20 +27,45 @@ public class Calendar_StepDefinitions {
     }
 
     @When("User clicks on calendar page link")
-    public void user_clicks_on_calendar_page_link() {
-        calendarPage.calendarPageLink.click();
+    public void userClicksOnCalendarPageLink () {
+            calendarPage.calendarPageLink.click();
+        }
 
-    }
-    @When("User clicks on action item button")
-    public void user_clicks_on_action_item_button() {
-        calendarPage.ActionItemButton.click();
-        calendarPage.DailyActionButton.click();
+    @And("User clicks on action item and then daily action button")
+    public void userClicksOnActionItemAndThenDailyActionButton () {
+            calendarPage.ActionItemButton.click();
+            calendarPage.DailyActionButton.click();
+        }
 
-    }
     @Then("User should be display daily calendar view")
-    public void user_should_be_display_daily_calendar_view() {
+    public void user_should_be_display_daily_calendar_view () {
+            Assert.assertTrue((calendarPage.DailyCalendarView).isDisplayed());
+        }
 
+    @When("User clicks on action item  and weekly action button")
+    public void userClicksOnActionItemAndWeeklyActionButton () {
+            calendarPage.ActionItemButton.click();
+            calendarPage.WeeklyActionButton.click();
+        }
 
+    @Then("User should be display weekly calendar view")
+    public void userShouldBeDisplayWeeklyCalendarView () {
+            Assert.assertTrue((calendarPage.WeeklyCalendarView).isDisplayed());
+        }
+
+    @When("User clicks on action item and monthly action button")
+    public void userClicksOnActionItemAndMonthlyActionButton () {
+            calendarPage.ActionItemButton.click();
+            calendarPage.WeeklyActionButton.click();
+        }
+
+    @Then("User should be display monthly calendar view")
+    public void userShouldBeDisplayMonthlyCalendarView () {
+            Assert.assertTrue((calendarPage.MonthlyCalendarView).isDisplayed());
+        }
+
+    @When("User clicks on new event button on the left side")
+    public void userClicksOnNewEventButtonOnTheLeftSide() {
+        calendarPage.NewEventButton.click();
     }
-
 }
