@@ -9,10 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
 
+    public BasePage() {
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+
     @FindBy(id = "nextcloud")
     public WebElement homePageLink;
 
-    @FindBy(xpath = "(//ul[@id='appmenu']//a)[1]")
+    @FindBy(xpath = "//header/div[1]/ul[1]/li[1]/a[1]")
     public WebElement filesPageLink;
 
     @FindBy(xpath = "(//ul[@id='appmenu']//a)[2]")
@@ -70,9 +74,6 @@ public class BasePage {
     public WebElement accountMenuLogoutButton;
 
 
-    public BasePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
 
     public void logout(){
         topRightSettingsExpandButton.click();
