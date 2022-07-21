@@ -7,14 +7,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -23,14 +23,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class Contacts_StepDefinition {
 
-    private static ContactsPage contactsPage = new ContactsPage();
-    private static WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-    private static int totalContacts;
-    private static WebElement contactWillBeDeleted;
+    private ContactsPage contactsPage = new ContactsPage();
+    private static final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    private int totalContacts;
+    private WebElement contactWillBeDeleted;
+    private String newContactName;
 
     @Then("User goes to Contacts page")
     public void user_goes_to_page() {
         contactsPage.contactsPageLink.click();
+        BrowserUtils.waitFor(5);
     }
 
     @Given("User clicks to new contact button")
@@ -43,7 +45,7 @@ public class Contacts_StepDefinition {
     public void userFillsPropertiesOut(String fullname, String company, String title, String phone, String email, String city, String country) {
 
         selectUnselectedInputs();
-
+        newContactName = fullname;
         wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
         contactsPage.newContactFullnameInput.clear();
         contactsPage.newContactFullnameInput.sendKeys(fullname);
@@ -56,7 +58,7 @@ public class Contacts_StepDefinition {
         BrowserUtils.waitFor(2);
     }
 
-    private static void selectUnselectedInputs() {
+    private void selectUnselectedInputs() {
 
         // find unselected inputs for info of new contact and get them into a list of String
         List<String> willClicked = new ArrayList<>(List.copyOf(contactsPage.propertiesToBeSelected
@@ -100,8 +102,8 @@ public class Contacts_StepDefinition {
         assertThat(middleColumnCount, is(equalTo(allContactsNumber)));
     }
 
-    @Then("User should be able to se the correct number near the “All Contacts” tab")
-    public void userShouldBeAbleToSeTheCorrectNumberNearTheAllContactsTab() {
+    @Then("User should be able to see the correct number near the “All Contacts” tab")
+    public void userShouldBeAbleToSeeTheCorrectNumberNearTheAllContactsTab() {
         int middleColumnCount = contactsPage.contactsInTheMiddleColumn.size();
         int allContactsNumber = Integer.parseInt(contactsPage.numberOfContacts.getText());
         assertThat(allContactsNumber, is(equalTo(middleColumnCount)));
@@ -158,5 +160,47 @@ public class Contacts_StepDefinition {
         Assert.assertEquals(totalContacts - 1,
                 Driver.getDriver().findElements(By.xpath("//div[@class='vue-recycle-scroller__item-view']"))
                         .size() - 1);
+    }
+
+    @Then("User should be able to see new created contact")
+    public void userShouldBeAbleToSeeNewCreatedContact() {
+        Assert.assertTrue(BrowserUtils
+                .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
+                .contains(newContactName));
+    }
+
+    @And("User fills these properties out")
+    public void userFillsThesePropertiesOut(Map<String, String> inputMap) {
+        selectUnselectedInputs();
+        newContactName = inputMap.get("Fullname");
+        wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
+        contactsPage.newContactFullnameInput.clear();
+        contactsPage.newContactFullnameInput.sendKeys(inputMap.get("Fullname"));
+        contactsPage.companyInput.sendKeys(inputMap.get("Company"));
+        contactsPage.titleInput.sendKeys(inputMap.get("Title"));
+        contactsPage.phoneInput.sendKeys(inputMap.get("Phone"));
+        contactsPage.emailInput.sendKeys(inputMap.get("Email"));
+        contactsPage.cityInput.sendKeys(inputMap.get("City"));
+        contactsPage.countryInput.sendKeys(inputMap.get("Country"));
+        BrowserUtils.waitFor(2);
+    }
+
+    @Then("User should see warning message")
+    public void userShouldSeeWarningMessage() {
+        try {
+            Assert.assertThrows(NoSuchFrameException.class, () -> {
+                Driver.getDriver().switchTo().alert().getText();
+            });
+
+        } catch (NoSuchFrameException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Then("User shouldn't be able to see new created contact")
+    public void userShouldnTBeAbleToSeeNewCreatedContact() {
+        Assert.assertFalse(BrowserUtils
+                .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
+                .contains(newContactName));
     }
 }
