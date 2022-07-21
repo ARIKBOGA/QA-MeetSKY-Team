@@ -14,7 +14,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
-public class FilesStepDefinitions {
+public class FilesFavoritesRenameComment_StepDefinitions {
     LoginPage loginPage = new LoginPage();
     FilesBasePage filesPage = new FilesBasePage();
     BasePage basePage = new BasePage();
@@ -143,7 +143,6 @@ public class FilesStepDefinitions {
     public void userClickOnTheThreeDotsToRemoveFromFavorites() {
         filesFavoritesPage.threeDotToToMoveComment.click();
     }
-
 
 }
 
