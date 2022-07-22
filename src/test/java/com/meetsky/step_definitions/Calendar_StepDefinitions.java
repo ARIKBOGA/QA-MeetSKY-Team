@@ -32,8 +32,8 @@ public class Calendar_StepDefinitions {
         }
 
     @And("User clicks on action item and then daily action button")
-    public void userClicksOnActionItemAndThenDailyActionButton () throws InterruptedException {
-        wait(20);
+    public void userClicksOnActionItemAndThenDailyActionButton () {
+
             calendarPage.ActionItemButton.click();
             calendarPage.DailyActionButton.click();
         }

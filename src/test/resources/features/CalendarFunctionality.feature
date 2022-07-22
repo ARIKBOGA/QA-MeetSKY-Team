@@ -1,4 +1,4 @@
-@wip
+
 Feature:Calendar Module Functionality
   User Story: As a user, I should be able to see daily-weekly-monthly calendar view
               and create a new event under the calendar module
@@ -12,7 +12,7 @@ Feature:Calendar Module Functionality
     When User clicks on calendar page link
     And User clicks on action item and then daily action button
     Then User should be display daily calendar view
-
+@wip
   Scenario:
     When User clicks on action item  and weekly action button
     Then User should be display weekly calendar view
