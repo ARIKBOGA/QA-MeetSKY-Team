@@ -30,12 +30,10 @@ public class FilesFavoritesRenameComment_StepDefinitions {
         // verification that user logged in
     }
 
-
     @And("user click on the three dots next to chosen file")
     public void userClickOnTheThreeDotsNextToChosenFile() {
         filesPage.threeDotNextToFile.click();
     }
-
 
     @And("user clicks on Add to favorites button")
     public void user_clicks_on_add_to_favorites_button() {
@@ -52,7 +50,6 @@ public class FilesFavoritesRenameComment_StepDefinitions {
         Assert.assertTrue(filesPage.favorited.isDisplayed());
     }
 
-
     @Given("User clicks on Files button on top header menu")
     public void userClicksOnFilesButtonOnTopHeaderMenu() {
         basePage.filesPageLink.click();
@@ -62,7 +59,6 @@ public class FilesFavoritesRenameComment_StepDefinitions {
     public void userNavigatesToFavoritesPage() {
         Driver.getDriver().get(ConfigurationReader.getProperty("favoritesPage"));
     }
-
 
     @And("user clicks on Rename button and rename the file as and see the new name")
     public void userClicksOnRenameButtonAndRenameTheFileAsAndSeeTheNewName() {
@@ -81,7 +77,6 @@ public class FilesFavoritesRenameComment_StepDefinitions {
         filesFavoritesPage.threeDotNextToName.click();
     }
 
-
     @Then("user can see the file name as {string}")
     public void userCanSeeTheFileNameAs(String arg0) {
         String rename = filesFavoritesPage.fileName.getText();
@@ -97,7 +92,6 @@ public class FilesFavoritesRenameComment_StepDefinitions {
     public void userClicksOnCommentsButton() {
         filesFavoritesPage.commentTabView.click();
     }
-
 
     @And("user clicks on New Comment text filed and types {string}")
     public void userClicksOnNewCommentTextFiledAndTypes(String arg0) {
@@ -133,12 +127,10 @@ public class FilesFavoritesRenameComment_StepDefinitions {
         Assert.assertFalse(pageSources.contains("New comment Added"));
     }
 
-
     @And("user clicks to three dot next to Name to move to comment")
     public void userClicksToThreeDotNextToNameToMoveToComment() {
         filesFavoritesPage.threeDotToToMoveComment.click();
     }
-
 
     @And("user clicks to three dot next to Name on comment section")
     public void userClicksToThreeDotNextToNameOnCommentSection() {
