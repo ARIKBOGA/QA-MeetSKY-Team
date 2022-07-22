@@ -11,16 +11,16 @@ public class CalendarPage extends BasePage{
     @FindBy(xpath="//button[@class='button primary new-event']")
     public WebElement NewEventButton;
 
-    @FindBy(xpath="//button[@class='icon action-item__menutoggle icon-view-module']")
+    @FindBy(xpath="//button[@class='icon action-item__menutoggle icon-view-day']")
     public WebElement ActionItemButton;
 
-    @FindBy(xpath="(//ul[@id='menu-moilt']//button)[1]")
+    @FindBy(xpath="(//ul[starts-with(@id,'menu')]//button)[1]")
     public WebElement DailyActionButton;
 
-    @FindBy(xpath="(//ul[@id='menu-moilt']//button)[2]")
+    @FindBy(xpath="(//ul[starts-with(@id,'menu')]//button)[2]")
     public WebElement WeeklyActionButton;
 
-    @FindBy(xpath="(//ul[@id='menu-moilt']//button)[3]")
+    @FindBy(xpath="(//ul[starts-with(@id,'menu')]//button)[3]")
     public WebElement MonthlyActionButton;
 
     @FindBy(xpath="//div[@class='fc-timegrid fc-timeGridDay-view fc-view']")
