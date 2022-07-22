@@ -20,6 +20,17 @@ public class FilesFavoritesRenameComment_StepDefinitions {
     BasePage basePage = new BasePage();
     FilesFavoritesRenameCommentPage filesFavoritesPage = new FilesFavoritesRenameCommentPage();
 
+
+    @Given("User is logged in with valid credentials")
+    public void userIsLoggedInWithValidCredentials() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
+        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_username"));
+        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
+        loginPage.loginButton.click();
+        // verification that user logged in
+    }
+
+
     @And("user click on the three dots next to chosen file")
     public void userClickOnTheThreeDotsNextToChosenFile() {
         filesPage.threeDotNextToFile.click();

@@ -2,7 +2,7 @@
 Feature: As a user, I should be able to add a file to favorites, rename any file and give some comments on any file.
 
   Background:
-    Given User logs in with valid credentials
+    Given User is logged in with valid credentials
 
   @MTSK-496
   Scenario: User can add any file to favorites from its own three dots menu
@@ -42,7 +42,7 @@ Feature: As a user, I should be able to add a file to favorites, rename any file
     Then user can see that the comment is deleted
 
   @MTSK-500
-  Scenario: User removes the file from favorites and goes back to normal
+  Scenario: Scenario: User removes the file from favorites from its own three dots menu
     Given User navigates to Favorites page
     And user click on the three dots to removeFrom favorites
     And user clicks on remove from favorites button
