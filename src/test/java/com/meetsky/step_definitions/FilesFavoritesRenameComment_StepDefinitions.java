@@ -2,8 +2,8 @@ package com.meetsky.step_definitions;
 
 import com.github.javafaker.Faker;
 import com.meetsky.pages.BasePage;
-import com.meetsky.pages.FilesFavoritesPage;
-import com.meetsky.pages.FilesPage;
+import com.meetsky.pages.FilesFavoritesRenameCommentPage;
+import com.meetsky.pages.FilesBasePage;
 import com.meetsky.pages.LoginPage;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
@@ -14,17 +14,26 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
-public class FilesStepDefinitions {
+public class FilesFavoritesRenameComment_StepDefinitions {
     LoginPage loginPage = new LoginPage();
-    FilesPage filesPage = new FilesPage();
+    FilesBasePage filesPage = new FilesBasePage();
     BasePage basePage = new BasePage();
-    FilesFavoritesPage filesFavoritesPage = new FilesFavoritesPage();
+    FilesFavoritesRenameCommentPage filesFavoritesPage = new FilesFavoritesRenameCommentPage();
+
+
+    @Given("User is logged in with valid credentials")
+    public void userIsLoggedInWithValidCredentials() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
+        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_username"));
+        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
+        loginPage.loginButton.click();
+
+    }
 
     @And("user click on the three dots next to chosen file")
     public void userClickOnTheThreeDotsNextToChosenFile() {
         filesPage.threeDotNextToFile.click();
     }
-
 
     @And("user clicks on Add to favorites button")
     public void user_clicks_on_add_to_favorites_button() {
@@ -41,7 +50,6 @@ public class FilesStepDefinitions {
         Assert.assertTrue(filesPage.favorited.isDisplayed());
     }
 
-
     @Given("User clicks on Files button on top header menu")
     public void userClicksOnFilesButtonOnTopHeaderMenu() {
         basePage.filesPageLink.click();
@@ -51,7 +59,6 @@ public class FilesStepDefinitions {
     public void userNavigatesToFavoritesPage() {
         Driver.getDriver().get(ConfigurationReader.getProperty("favoritesPage"));
     }
-
 
     @And("user clicks on Rename button and rename the file as and see the new name")
     public void userClicksOnRenameButtonAndRenameTheFileAsAndSeeTheNewName() {
@@ -70,7 +77,6 @@ public class FilesStepDefinitions {
         filesFavoritesPage.threeDotNextToName.click();
     }
 
-
     @Then("user can see the file name as {string}")
     public void userCanSeeTheFileNameAs(String arg0) {
         String rename = filesFavoritesPage.fileName.getText();
@@ -86,7 +92,6 @@ public class FilesStepDefinitions {
     public void userClicksOnCommentsButton() {
         filesFavoritesPage.commentTabView.click();
     }
-
 
     @And("user clicks on New Comment text filed and types {string}")
     public void userClicksOnNewCommentTextFiledAndTypes(String arg0) {
@@ -122,12 +127,10 @@ public class FilesStepDefinitions {
         Assert.assertFalse(pageSources.contains("New comment Added"));
     }
 
-
     @And("user clicks to three dot next to Name to move to comment")
     public void userClicksToThreeDotNextToNameToMoveToComment() {
         filesFavoritesPage.threeDotToToMoveComment.click();
     }
-
 
     @And("user clicks to three dot next to Name on comment section")
     public void userClicksToThreeDotNextToNameOnCommentSection() {
@@ -143,7 +146,6 @@ public class FilesStepDefinitions {
     public void userClickOnTheThreeDotsToRemoveFromFavorites() {
         filesFavoritesPage.threeDotToToMoveComment.click();
     }
-
 
 }
 
