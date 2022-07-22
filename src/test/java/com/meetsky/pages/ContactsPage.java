@@ -172,6 +172,9 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//div[@class='vue-recycle-scroller__item-view']")
     public List<WebElement> contactsInTheMiddleColumn;
 
+    @FindBy(xpath = "//div[@class='vue-recycle-scroller__item-view']/div/div[2]")
+    public List<WebElement> contactsInTheMiddleColumnForText;
+
     @FindBy(xpath = "//button[@class='icon action-item__menutoggle icon-picture-force-white']")
     public WebElement changePictureButton;
 
