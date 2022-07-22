@@ -1,10 +1,8 @@
 package com.meetsky.step_definitions;
 
 import com.google.common.io.Files;
-import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -23,18 +21,14 @@ public class Hooks {
     }
 
     @After
-    public void tearDownScenario() {
+    public void teardownScenario(Scenario scenario) throws IOException {
+        if (scenario.isFailed()) {
+            File camera = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.FILE);
+            Files.move(camera, new File("screenshots/" + id + "_" + scenario.getName() + ".png"));
+            byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", (id++) + scenario.getName());
+        }
+
         Driver.closeDriver();
-    }
-
-
-    @AfterStep
-    public void afterSteps(Scenario scenario) throws IOException {
-        //if (scenario.isFailed()) {
-        BrowserUtils.waitFor(1);
-        File camera = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.FILE);
-        Files.move(camera, new File("screenshots/" + id + "_" + scenario.getName() + ".png"));
-        byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-        scenario.attach(screenshot, "image/png", (id++) + scenario.getName());
     }
 }
