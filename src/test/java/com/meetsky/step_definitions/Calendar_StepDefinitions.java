@@ -2,6 +2,7 @@ package com.meetsky.step_definitions;
 
 import com.meetsky.pages.CalendarPage;
 import com.meetsky.pages.LoginPage;
+import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -45,6 +46,7 @@ public class Calendar_StepDefinitions {
 
     @When("User clicks on action item  and weekly action button")
     public void userClicksOnActionItemAndWeeklyActionButton () {
+        BrowserUtils.waitFor(2);
             calendarPage.ActionItemButton.click();
             calendarPage.WeeklyActionButton.click();
         }
@@ -57,7 +59,7 @@ public class Calendar_StepDefinitions {
     @When("User clicks on action item and monthly action button")
     public void userClicksOnActionItemAndMonthlyActionButton () {
             calendarPage.ActionItemButton.click();
-            calendarPage.WeeklyActionButton.click();
+            calendarPage.MonthlyActionButton.click();
         }
 
     @Then("User should be display monthly calendar view")

@@ -11,7 +11,7 @@ public class CalendarPage extends BasePage{
     @FindBy(xpath="//button[@class='button primary new-event']")
     public WebElement NewEventButton;
 
-    @FindBy(xpath="//button[@class='icon action-item__menutoggle icon-view-day']")
+    @FindBy(xpath="//button[contains(@class,'menutoggle icon-view-')]")
     public WebElement ActionItemButton;
 
     @FindBy(xpath="(//ul[starts-with(@id,'menu')]//button)[1]")
