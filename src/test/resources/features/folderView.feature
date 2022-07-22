@@ -10,10 +10,20 @@ Feature: Folder View Functionality [AutomationS4]
 
   @MTSK-493
   Scenario: User can change folder view order by Name
-    Given User clicks Name link
+    Given User toggles list view
+    When User clicks Name link
+    And User scrolls to button of page to load all items
     Then User sees Files and Folders in an order according to their Names
 
   @MTSK-494
   Scenario: User can change folder view order by Size
-    Given User clicks Size link
+    Given User toggles list view
+    When User clicks Size link
+    And User scrolls to button of page to load all items
     Then User sees Files and Folders in an order according to their Size
+
+    Scenario: User can change folder view order by Modified
+      Given User toggles list view
+      When User clicks Modified link
+      And User scrolls to button of page to load all items
+      Then User sees Files and Folders in an order according to Modified day

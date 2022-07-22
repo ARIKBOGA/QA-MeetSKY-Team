@@ -2,8 +2,10 @@ package com.meetsky.step_definitions;
 
 import com.meetsky.pages.FilesPage;
 import com.meetsky.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -22,10 +24,13 @@ public class FolderView_StepDefinitions {
 
     @Given("User clicks Name link")
     public void user_clicks_name_link() {
-
         filesPage.nameText.click();
+    }
 
-
+    @And("User scrolls to button of page to load all items")
+    public void userScrollsToButtonOfPageToLoadAllItems() {
+        wait.until(ExpectedConditions.visibilityOf(filesPage.summary));
+        actions.moveToElement(filesPage.summary).perform();
     }
 
 
@@ -37,11 +42,6 @@ public class FolderView_StepDefinitions {
         List<String> ActualNamesList = new ArrayList<>();
         String sortingIndicator = filesPage.sortingTick.getAttribute("class");
         System.out.println("sortingIndicator = " + sortingIndicator);
-
-        wait.until(ExpectedConditions.visibilityOf(filesPage.summary));
-
-        actions.moveToElement(filesPage.summary).perform();
-
 
         if (sortingIndicator.endsWith("-n")) {// -n  indicates it is ascending , else descending
             for (WebElement webElement : filesPage.foldersNameList) {
@@ -66,7 +66,7 @@ public class FolderView_StepDefinitions {
             for (WebElement webElement : filesPage.foldersNameList) {
                 expectedFoldersNameList.add(webElement.getAttribute("data-file").toLowerCase(Locale.ROOT));
             }
-            expectedFoldersNameList= expectedFoldersNameList.stream().sorted().collect(Collectors.toList());
+            expectedFoldersNameList = expectedFoldersNameList.stream().sorted().collect(Collectors.toList());
             Collections.reverse(expectedFoldersNameList);
             expectedFilesNameList.addAll(expectedFoldersNameList);
             expectedList = expectedFilesNameList;
@@ -106,26 +106,55 @@ public class FolderView_StepDefinitions {
 
         List<Integer> sizeListAfterClick = new ArrayList<>();
         for (WebElement webElement : filesPage.sizeList) {
-           sizeListAfterClick.add(Integer.valueOf(webElement.getText().replaceAll("[^0-9]", ""))) ;
+            sizeListAfterClick.add(Integer.valueOf(webElement.getText().replaceAll("[^0-9]", "")));
         }
 
         if (sortingIndicator.endsWith("-n")) {
-           Collections.sort(SizeListBeforeClick);
+            Collections.sort(SizeListBeforeClick);
 
             System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
             System.out.println("sizeListAfterClick = " + sizeListAfterClick);
-            Assert.assertEquals(SizeListBeforeClick,sizeListAfterClick);
+            Assert.assertEquals(SizeListBeforeClick, sizeListAfterClick);
 
         } else {
-          SizeListBeforeClick = SizeListBeforeClick.stream().sorted().collect(Collectors.toList());
+            SizeListBeforeClick = SizeListBeforeClick.stream().sorted().collect(Collectors.toList());
             Collections.reverse(SizeListBeforeClick);
 
             System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
             System.out.println("sizeListAfterClick = " + sizeListAfterClick);
 
-            Assert.assertEquals(SizeListBeforeClick,sizeListAfterClick);
+            Assert.assertEquals(SizeListBeforeClick, sizeListAfterClick);
         }
 
 
     }
+
+    @Given("User toggles list view")
+    public void userTogglesListView() {
+        if (filesPage.toggleButton.getAttribute("class").equals("button icon-toggle-filelist")) {
+            filesPage.toggleButton.click();
+        }
+    }
+
+    @When("User clicks Modified link")
+    public void userClicksModifiedLink() {
+        //before clicking modified, I have to put the files in to a Map so that I can compare before and after
+
+        List<Map<String,String>> AllFilesAndFoldersNameAndModifiedTimeBeforeClicking =new ArrayList<>();
+        for (WebElement webElement : filesPage.AllFilesFolderList) {
+            Map<String,String>row=new LinkedHashMap<>();
+            row.put("Name",webElement.getAttribute("data-file"));
+            row.put("Modified",webElement.getAttribute("data-mtime"));
+            AllFilesAndFoldersNameAndModifiedTimeBeforeClicking.add(row);
+        }
+
+        System.out.println("AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = " + AllFilesAndFoldersNameAndModifiedTimeBeforeClicking);
+        //////////////////////////////////////////////////////////////////////
+        filesPage.modifiedText.click();
+
+
+
+    }
+
+
 }

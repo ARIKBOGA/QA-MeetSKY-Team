@@ -58,6 +58,15 @@ public class FilesPage {
     @FindBy(xpath = "//td[@class=\"date\"]/span[contains(@data-original-title,\"\")]")
     public List<WebElement> modifiedTimeList;
 
+    @FindBy(xpath = "//table//tbody//tr[contains(@data-id,\"\")]")
+    public List<WebElement> AllFilesFolderList;
+
+    @FindBy(xpath = "//label[@id=\"view-toggle\"]")
+    public WebElement toggleButton;
+
+
+
+
 
 
 
