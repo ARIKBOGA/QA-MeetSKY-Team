@@ -2,6 +2,7 @@ package com.meetsky.step_definitions;
 
 import com.meetsky.pages.FilesPage;
 import com.meetsky.utilities.Driver;
+import com.meetsky.utilities.MapUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 public class FolderView_StepDefinitions {
     List<Integer> SizeListBeforeClick = new ArrayList<>();
+    List<Map<String, Object>> AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = new ArrayList<>();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
     Actions actions = new Actions(Driver.getDriver());
 
@@ -140,11 +142,11 @@ public class FolderView_StepDefinitions {
     public void userClicksModifiedLink() {
         //before clicking modified, I have to put the files in to a Map so that I can compare before and after
 
-        List<Map<String,String>> AllFilesAndFoldersNameAndModifiedTimeBeforeClicking =new ArrayList<>();
+         AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = new ArrayList<>();
         for (WebElement webElement : filesPage.AllFilesFolderList) {
-            Map<String,String>row=new LinkedHashMap<>();
-            row.put("Name",webElement.getAttribute("data-file"));
-            row.put("Modified",webElement.getAttribute("data-mtime"));
+            Map<String, Object> row = new LinkedHashMap<>();
+            row.put("Name", webElement.getAttribute("data-file"));
+            row.put("Modified", Long.valueOf(webElement.getAttribute("data-mtime")));
             AllFilesAndFoldersNameAndModifiedTimeBeforeClicking.add(row);
         }
 
@@ -153,8 +155,37 @@ public class FolderView_StepDefinitions {
         filesPage.modifiedText.click();
 
 
-
     }
 
 
+    @Then("User sees Files and Folders in an order according to Modified day")
+    public void userSeesFilesAndFoldersInAnOrderAccordingToModifiedDay() {
+        if (filesPage.sortingType.getAttribute("class").endsWith("n")) {
+            List<Map<String, Object>> AllFilesAndFoldersNameAndModifiedTimeAfterClicking = new ArrayList<>();
+            for (WebElement webElement : filesPage.AllFilesFolderList) {
+                Map<String, Object> row = new LinkedHashMap<>();
+                row.put("Name", webElement.getAttribute("data-file"));
+                row.put("Modified", Long.valueOf(webElement.getAttribute("data-mtime")));
+                AllFilesAndFoldersNameAndModifiedTimeAfterClicking.add(row);
+            }
+            List<Map<String, Object>> exptectedNSorted = MapUtils.sortByValue(AllFilesAndFoldersNameAndModifiedTimeBeforeClicking, "Name", "Modified");
+            Assert.assertEquals(AllFilesAndFoldersNameAndModifiedTimeAfterClicking,exptectedNSorted);
+
+
+        } else {
+            List<Map<String, Object>> AllFilesAndFoldersNameAndModifiedTimeAfterClicking = new ArrayList<>();
+            for (WebElement webElement : filesPage.AllFilesFolderList) {
+                Map<String, Object> row = new LinkedHashMap<>();
+                row.put("Name", webElement.getAttribute("data-file"));
+                row.put("Modified", Long.valueOf(webElement.getAttribute("data-mtime")));
+                AllFilesAndFoldersNameAndModifiedTimeAfterClicking.add(row);
+            }
+            List<Map<String, Object>> exptectedNSorted = MapUtils.sortByValue(AllFilesAndFoldersNameAndModifiedTimeBeforeClicking, "Name", "Modified");
+            Collections.reverse(exptectedNSorted);
+            Assert.assertEquals(AllFilesAndFoldersNameAndModifiedTimeAfterClicking,exptectedNSorted);
+
+
+        }
+
+    }
 }

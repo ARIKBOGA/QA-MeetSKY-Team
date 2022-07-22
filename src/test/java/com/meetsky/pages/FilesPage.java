@@ -23,7 +23,7 @@ public class FilesPage {
 
 
 
-    @FindBy(xpath = "//span[contains(@class,\"sort-indicator icon-triangle-\")]/../span")
+    @FindBy(xpath = "//span[contains(@class,\"sort-indicator icon-triangle-\")]")
     public WebElement sortingType;
 
 
