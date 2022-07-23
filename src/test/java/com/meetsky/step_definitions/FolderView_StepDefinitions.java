@@ -116,7 +116,7 @@ public class FolderView_StepDefinitions {
 
             System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
             System.out.println("sizeListAfterClick = " + sizeListAfterClick);
-            Assert.assertEquals(SizeListBeforeClick, sizeListAfterClick);
+            Assert.assertEquals(sizeListAfterClick,SizeListBeforeClick);
 
         } else {
             SizeListBeforeClick = SizeListBeforeClick.stream().sorted().collect(Collectors.toList());
@@ -125,7 +125,7 @@ public class FolderView_StepDefinitions {
             System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
             System.out.println("sizeListAfterClick = " + sizeListAfterClick);
 
-            Assert.assertEquals(SizeListBeforeClick, sizeListAfterClick);
+            Assert.assertEquals(sizeListAfterClick,SizeListBeforeClick);
         }
 
 
