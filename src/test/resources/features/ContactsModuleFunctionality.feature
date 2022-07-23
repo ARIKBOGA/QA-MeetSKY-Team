@@ -57,7 +57,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     Then User should see warning message
     Then User shouldn't be able to see new created contact
 
-  @Smoke @wip
+  @wip
   Scenario Outline: User can create a new contact with all properties filled with valid inputs
     Given User clicks to new contact button
     And User selects these options
@@ -67,9 +67,9 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<City>" "<Country>" properties out
     Then User should be able to see new created contact
     Examples:
-      | Full name     | Company | Title | Phone      | Email             | City   | Country |
-      | Didier Drogba | Cydeo   | QA    | 8764756387 | ddrogba@gmail.com | London | England |
-    #      | Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |
+      | Full name     | Company | Title   | Phone      | Email             | City   | Country |
+      | Didier Drogba | Cydeo   | QA      | 8764756387 | ddrogba@gmail.com | London | England |
+      | Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |
 
   @time
   Scenario:
