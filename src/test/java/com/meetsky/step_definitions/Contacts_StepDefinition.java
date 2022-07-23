@@ -170,7 +170,7 @@ public class Contacts_StepDefinition {
     @And("User fills these properties out")
     public void userFillsThesePropertiesOut(DataTable table) {
         Map<String, String> inputMap = table.asMap();
-        selectUnselectedInputs();
+
         newContactName = inputMap.get("Fullname");
         wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
         contactsPage.newContactFullnameInput.clear();
@@ -186,9 +186,9 @@ public class Contacts_StepDefinition {
 
     @Then("User should see warning message")
     public void userShouldSeeWarningMessage() {
-        try{
+        try {
             Driver.getDriver().switchTo().alert().getText();
-        }catch (NoAlertPresentException e){
+        } catch (NoAlertPresentException e) {
             Assert.fail("NoAlertPresentException is thrown. There is no alert message to warn");
         }
 
@@ -202,5 +202,32 @@ public class Contacts_StepDefinition {
         Assert.assertFalse(BrowserUtils
                 .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
                 .contains(newContactName));
+    }
+
+    /**
+     * This method selects the option according to given Map.
+     *
+     * @param optionMap: Key: name of inputs, value: The option that will be selected
+     */
+    @And("User selects these options")
+    public void userSelectsTheseOptions(Map<String, String> optionMap) {
+
+        // opening the closed input elements
+        selectUnselectedInputs();
+
+        optionMap.forEach((key, value) -> {
+            // click to menu link according to "key"
+            BrowserUtils.clickWithJS(Driver.getDriver().findElement(By.xpath("(//div[contains(text(),'" + key + "')]/../..//input)[1]"))); //menu link
+
+            // get the selectable options for related input and according to "key"
+            List<WebElement> options = Driver.getDriver().findElements(By.xpath("//div[contains(text(),'" + key + "')]/../..//div[@class='name-parts']")); //options
+
+            // find the option which equals to "value" and select it by clicking.
+            options.stream()
+                    .filter(element ->
+                            element.getAttribute("title").equalsIgnoreCase(value))
+                    .forEach(BrowserUtils::clickWithJS);
+        });
+        BrowserUtils.waitFor(2);
     }
 }
