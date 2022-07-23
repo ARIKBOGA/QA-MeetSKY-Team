@@ -26,7 +26,7 @@ Feature:Calendar Module Functionality
              through the monthly calendar view
     Given User clicks on calendar page link
     When User clicks on new event button on the left side
-    And
+
 
 
 

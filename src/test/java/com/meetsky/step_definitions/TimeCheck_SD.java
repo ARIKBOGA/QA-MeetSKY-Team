@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 public class TimeCheck_SD {
 
     BasePage basePage = new BasePage();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 
     @Given("user is on th homepage")
     public void userIsOnThHomepage() {
@@ -43,18 +44,19 @@ public class TimeCheck_SD {
     public void userShouldSeeTheCurrentLocalTimeUnderTheLocalDropdown() {
 
         WebElement webElement = Driver.getDriver().findElement(By.xpath("//span[@id='localeexample-time']"));
-        LocalDateTime now = LocalDateTime.now();
 
-        System.out.println("webElement.getText() = " + webElement.getAttribute("innerText"));
-        System.out.println("now = " + now.toString().substring(11, 19));
+        wait.until(ExpectedConditions.visibilityOf(webElement));
 
-        String actualTime = webElement.getText();
+        String expectedTime = LocalDateTime.now().toString().substring(11, 19);
+        String actualTime = webElement.getAttribute("innerText");
+        actualTime = actualTime.endsWith("AM") ? actualTime.substring(0, actualTime.length() - 3) : Integer.parseInt(actualTime.substring(0, 2)) + 12 + actualTime.substring(2, actualTime.length() - 3);
 
-        actualTime = actualTime.endsWith("AM") ? actualTime.substring(0, actualTime.length() - 3)
-                : Integer.parseInt(actualTime.substring(0, 2)) + 12 + actualTime.substring(2, actualTime.length() - 3);
+        System.out.println("expectedTime = " + expectedTime);
+        System.out.println("actualTime = " + actualTime);
 
+        Assert.assertTrue(expectedTime.contains(actualTime.substring(0, 7))); // check for the equality except last digit
+        Assert.assertEquals(expectedTime, actualTime);
 
-        Assert.assertEquals(now.toString().substring(11, 19), actualTime);
 
     }
 }
