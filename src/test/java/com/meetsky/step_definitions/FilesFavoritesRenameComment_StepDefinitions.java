@@ -24,7 +24,7 @@ public class FilesFavoritesRenameComment_StepDefinitions {
     @Given("User is logged in with valid credentials")
     public void userIsLoggedInWithValidCredentials() {
         Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
-        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_username"));
+        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("user_name_Ahmet"));
         loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
         loginPage.loginButton.click();
 
