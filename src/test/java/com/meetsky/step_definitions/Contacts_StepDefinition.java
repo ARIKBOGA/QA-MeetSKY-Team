@@ -3,32 +3,60 @@ package com.meetsky.step_definitions;
 import com.meetsky.pages.ContactsPage;
 import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.Driver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.openqa.selenium.WebElement;
+import org.junit.Assert;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class Contacts_StepDefinition {
 
-    private static ContactsPage contactsPage = new ContactsPage();
-    private static WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    private ContactsPage contactsPage = new ContactsPage();
+    private static final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    private int totalContacts;
+    private WebElement contactWillBeDeleted;
+    private String newContactName;
 
     @Then("User goes to Contacts page")
     public void user_goes_to_page() {
         contactsPage.contactsPageLink.click();
+        BrowserUtils.waitFor(5);
     }
 
-    @Given("User fills all properties out")
-    public void userFillsAllPropertiesOut() {
+    @Given("User clicks to new contact button")
+    public void userClicksToNewContactButton() {
+        contactsPage.newContactButton.click();
+    }
+
+
+    @And("User fills {string} {string} {string} {string} {string} {string} {string} properties out")
+    public void userFillsPropertiesOut(String fullname, String company, String title, String phone, String email, String city, String country) {
+
         selectUnselectedInputs();
+        newContactName = fullname;
+        wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
+        contactsPage.newContactFullnameInput.clear();
+        contactsPage.newContactFullnameInput.sendKeys(fullname);
+        contactsPage.companyInput.sendKeys(company);
+        contactsPage.titleInput.sendKeys(title);
+        contactsPage.phoneInput.sendKeys(phone);
+        contactsPage.emailInput.sendKeys(email);
+        contactsPage.cityInput.sendKeys(city);
+        contactsPage.countryInput.sendKeys(country);
+        BrowserUtils.waitFor(2);
     }
 
-    private static void selectUnselectedInputs() {
+    private void selectUnselectedInputs() {
 
         // find unselected inputs for info of new contact and get them into a list of String
         List<String> willClicked = new ArrayList<>(List.copyOf(contactsPage.propertiesToBeSelected
@@ -56,5 +84,123 @@ public class Contacts_StepDefinition {
             }
         }
 
+    }
+
+    @Given("User clicks to All contacts link")
+    public void userClicksToLink() {
+        totalContacts = contactsPage.contactsInTheMiddleColumn.size();
+        contactsPage.allContactsLink.click();
+        BrowserUtils.waitFor(3);
+    }
+
+    @Then("User should be able to see all contacts in the middle column")
+    public void userShouldBeAbleToSeeAllContactsInTheMiddleColumn() {
+        int middleColumnCount = contactsPage.contactsInTheMiddleColumn.size();
+        int allContactsNumber = Integer.parseInt(contactsPage.numberOfContacts.getText());
+        assertThat(middleColumnCount, is(equalTo(allContactsNumber)));
+    }
+
+    @Then("User should be able to see the correct number near the “All Contacts” tab")
+    public void userShouldBeAbleToSeeTheCorrectNumberNearTheAllContactsTab() {
+        int middleColumnCount = contactsPage.contactsInTheMiddleColumn.size();
+        int allContactsNumber = Integer.parseInt(contactsPage.numberOfContacts.getText());
+        assertThat(allContactsNumber, is(equalTo(middleColumnCount)));
+    }
+
+    @And("User clicks to a random contact in the middle column")
+    public void userClicksToARandomContactInTheMiddleColumn() {
+        totalContacts = contactsPage.contactsInTheMiddleColumn.size();
+        contactWillBeDeleted = contactsPage.contactsInTheMiddleColumn
+                .get(new Random().nextInt(contactsPage.contactsInTheMiddleColumn.size()));
+        totalContacts = contactsPage.contactsInTheMiddleColumn.size();
+        contactWillBeDeleted.click();
+    }
+
+    @And("User clicks to Change Picture button")
+    public void userClicksToChangePictureButton() {
+        contactsPage.changePictureButton.click();
+    }
+
+    @And("User clicks to Choose From File button")
+    public void userClicksToChooseFromFileButton() {
+        contactsPage.chooseFromFilesButton.click();
+    }
+
+    @And("User selects a jpeg file by clicking")
+    public void userSelectsAJpegFileByClicking() {
+        contactsPage.pictureWillBeSelected.click();
+    }
+
+    @And("User clicks to Choose button")
+    public void userClicksToChooseButton() {
+        contactsPage.chooseButton.click();
+    }
+
+    @Then("User should be able to see the PP has been changed")
+    public void userShouldBeAbleToSeeThePPHasBeenChanged() {
+        Assert.assertTrue(contactsPage.profilePicture.isEnabled());
+        contactsPage.profilePicture.click();
+    }
+
+    @And("User clicks to Three dot menu link")
+    public void userClicksToThreeDotMenuLink() {
+        contactsPage.threeDotsMenuButton.click();
+    }
+
+    @And("User clicks to Delete button")
+    public void userClicksToDeleteButton() {
+        contactsPage.deleteContactButton.click();
+    }
+
+    @Then("User should be able to see the contact has been deleted")
+    public void userShouldBeAbleToSeeTheContactHasBeenDeleted() {
+        BrowserUtils.waitFor(3);
+        Assert.assertEquals(totalContacts - 1,
+                Driver.getDriver().findElements(By.xpath("//div[@class='vue-recycle-scroller__item-view']"))
+                        .size() - 1);
+    }
+
+    @Then("User should be able to see new created contact")
+    public void userShouldBeAbleToSeeNewCreatedContact() {
+        Assert.assertTrue(BrowserUtils
+                .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
+                .contains(newContactName));
+    }
+
+    @And("User fills these properties out")
+    public void userFillsThesePropertiesOut(DataTable table) {
+        Map<String, String> inputMap = table.asMap();
+        selectUnselectedInputs();
+        newContactName = inputMap.get("Fullname");
+        wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
+        contactsPage.newContactFullnameInput.clear();
+        contactsPage.newContactFullnameInput.sendKeys(inputMap.get("Fullname"));
+        contactsPage.companyInput.sendKeys(inputMap.get("Company"));
+        contactsPage.titleInput.sendKeys(inputMap.get("Title"));
+        contactsPage.phoneInput.sendKeys(inputMap.get("Phone"));
+        contactsPage.emailInput.sendKeys(inputMap.get("Email"));
+        contactsPage.cityInput.sendKeys(inputMap.get("City"));
+        contactsPage.countryInput.sendKeys(inputMap.get("Country"));
+        BrowserUtils.waitFor(2);
+    }
+
+    @Then("User should see warning message")
+    public void userShouldSeeWarningMessage() {
+        try{
+            Driver.getDriver().switchTo().alert().getText();
+        }catch (NoAlertPresentException e){
+            Assert.fail("NoAlertPresentException is thrown. There is no alert message to warn");
+        }
+
+        // assertThrows() sample using
+        //Assert.assertThrows(NoAlertPresentException.class, () -> Driver.getDriver().switchTo().alert().getText());
+
+    }
+
+    @Then("User shouldn't be able to see new created contact")
+    public void userShouldnTBeAbleToSeeNewCreatedContact() {
+        Assert.assertFalse(BrowserUtils
+                .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
+                .contains(newContactName));
     }
 }
