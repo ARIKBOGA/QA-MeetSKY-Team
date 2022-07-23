@@ -116,7 +116,7 @@ public class FolderView_StepDefinitions {
 
             System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
             System.out.println("sizeListAfterClick = " + sizeListAfterClick);
-            Assert.assertEquals(sizeListAfterClick,SizeListBeforeClick);
+            Assert.assertEquals(sizeListAfterClick, SizeListBeforeClick);
 
         } else {
             SizeListBeforeClick = SizeListBeforeClick.stream().sorted().collect(Collectors.toList());
@@ -125,7 +125,7 @@ public class FolderView_StepDefinitions {
             System.out.println("SizeListBeforeClick = " + SizeListBeforeClick);
             System.out.println("sizeListAfterClick = " + sizeListAfterClick);
 
-            Assert.assertEquals(sizeListAfterClick,SizeListBeforeClick);
+            Assert.assertEquals(sizeListAfterClick, SizeListBeforeClick);
         }
 
 
@@ -140,9 +140,18 @@ public class FolderView_StepDefinitions {
 
     @When("User clicks Modified link")
     public void userClicksModifiedLink() {
+
+        filesPage.modifiedText.click();
+
+
+    }
+
+
+    @Then("User sees Files and Folders in an order according to Modified day")
+    public void userSeesFilesAndFoldersInAnOrderAccordingToModifiedDay() {
         //before clicking modified, I have to put the files in to a Map so that I can compare before and after
 
-         AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = new ArrayList<>();
+        AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = new ArrayList<>();
         for (WebElement webElement : filesPage.AllFilesFolderList) {
             Map<String, Object> row = new LinkedHashMap<>();
             row.put("Name", webElement.getAttribute("data-file"));
@@ -152,15 +161,12 @@ public class FolderView_StepDefinitions {
 
         System.out.println("AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = " + AllFilesAndFoldersNameAndModifiedTimeBeforeClicking);
         //////////////////////////////////////////////////////////////////////
-        filesPage.modifiedText.click();
 
 
-    }
+        String sortingTypeAttribute = filesPage.sortingType.getAttribute("class");
+        System.out.println("sortingTypeAttribute " + sortingTypeAttribute.charAt(sortingTypeAttribute.length() - 1));
 
-
-    @Then("User sees Files and Folders in an order according to Modified day")
-    public void userSeesFilesAndFoldersInAnOrderAccordingToModifiedDay() {
-        if (filesPage.sortingType.getAttribute("class").endsWith("n")) {
+        if (sortingTypeAttribute.endsWith("n")) {
             List<Map<String, Object>> AllFilesAndFoldersNameAndModifiedTimeAfterClicking = new ArrayList<>();
             for (WebElement webElement : filesPage.AllFilesFolderList) {
                 Map<String, Object> row = new LinkedHashMap<>();
@@ -168,8 +174,9 @@ public class FolderView_StepDefinitions {
                 row.put("Modified", Long.valueOf(webElement.getAttribute("data-mtime")));
                 AllFilesAndFoldersNameAndModifiedTimeAfterClicking.add(row);
             }
+
             List<Map<String, Object>> exptectedNSorted = MapUtils.sortByValue(AllFilesAndFoldersNameAndModifiedTimeBeforeClicking, "Name", "Modified");
-            Assert.assertEquals(AllFilesAndFoldersNameAndModifiedTimeAfterClicking,exptectedNSorted);
+            Assert.assertEquals(exptectedNSorted, AllFilesAndFoldersNameAndModifiedTimeAfterClicking);
 
 
         } else {
@@ -181,8 +188,10 @@ public class FolderView_StepDefinitions {
                 AllFilesAndFoldersNameAndModifiedTimeAfterClicking.add(row);
             }
             List<Map<String, Object>> exptectedNSorted = MapUtils.sortByValue(AllFilesAndFoldersNameAndModifiedTimeBeforeClicking, "Name", "Modified");
+            System.out.println("exptectedNSortedBeforeReversion = " + exptectedNSorted);
             Collections.reverse(exptectedNSorted);
-            Assert.assertEquals(AllFilesAndFoldersNameAndModifiedTimeAfterClicking,exptectedNSorted);
+            System.out.println("exptectedNSortedAfterReversion  = " + exptectedNSorted);
+            Assert.assertEquals(exptectedNSorted, AllFilesAndFoldersNameAndModifiedTimeAfterClicking);
 
 
         }
