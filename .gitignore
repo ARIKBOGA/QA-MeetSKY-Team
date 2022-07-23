@@ -5,3 +5,4 @@ target
 /src/test/java/com/meetsky/step_definitions/Hooks.java
 /src/test/java/com/meetsky/runners/CukesRunner.java
 /configuration.properties
+/screenshots
