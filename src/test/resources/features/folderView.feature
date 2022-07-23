@@ -1,3 +1,4 @@
+@wip
 Feature: Folder View Functionality [AutomationS4]
   As a user, I should be able to change folder view order by using Name/Size/Modified buttons
 
@@ -34,11 +35,12 @@ Feature: Folder View Functionality [AutomationS4]
   button at the right corner of all files tab screen
     Given User click the toggle button
     Then User sees the files and folders' view changed
-@wip
-    Scenario: User can select all the files at once and see the total values of all files in the first line
-    when clicked on the “select all” checkbox at the left top corner of the list
-      Given User clicks the select All Checkbox at the left top corner of the list
-      Then User sees all files and folders are selected
+
+  @MTSK-535
+  Scenario: User can select all the files at once and see the total values of all files in the first line
+  when clicked on the “select all” checkbox at the left top corner of the list
+    Given User clicks the select All Checkbox at the left top corner of the list
+    Then User sees all files and folders are selected
 
 
 
