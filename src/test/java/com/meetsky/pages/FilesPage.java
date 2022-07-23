@@ -64,6 +64,12 @@ public class FilesPage {
     @FindBy(xpath = "//label[@id=\"view-toggle\"]")
     public WebElement toggleButton;
 
+    @FindBy(xpath = "//label[@for=\"select_all_files\"]")
+    public WebElement selectAllCheckbox;
+
+    @FindBy(xpath = "//th[@id=\"headerName\"]//span")
+    public WebElement textShowingNumbersOfSelectedFilesAndFolders;
+
 
 
 

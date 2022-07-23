@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 public class FolderView_StepDefinitions {
     List<Integer> SizeListBeforeClick = new ArrayList<>();
     List<Map<String, Object>> AllFilesAndFoldersNameAndModifiedTimeBeforeClicking = new ArrayList<>();
+
+    String toggleTypeFirstTimeOnFilesPage;
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
     Actions actions = new Actions(Driver.getDriver());
 
@@ -195,6 +197,63 @@ public class FolderView_StepDefinitions {
 
 
         }
+
+    }
+
+    @Given("User click the toggle button")
+    public void userClickTheToggleButton() {
+        toggleTypeFirstTimeOnFilesPage = filesPage.toggleButton.getAttribute("class");
+        filesPage.toggleButton.click();
+
+    }
+
+    @Then("User sees the files and folders' view changed")
+    public void userSeesTheFilesAndFoldersViewChanged() {
+        if (toggleTypeFirstTimeOnFilesPage.equals("button icon-toggle-filelist")) {
+            Assert.assertTrue(filesPage.toggleButton.getAttribute("class").equals("button icon-toggle-pictures"));
+        }
+        if (toggleTypeFirstTimeOnFilesPage.equals("button icon-toggle-pictures")) {
+
+            Assert.assertTrue(filesPage.toggleButton.getAttribute("class").equals("button icon-toggle-filelist"));
+
+        }
+    }
+
+    @Given("User clicks the select All Checkbox at the left top corner of the list")
+    public void userClicksTheSelectAllCheckboxAtTheLeftTopCornerOfTheList() {
+        filesPage.selectAllCheckbox.click();
+    }
+
+    @Then("User sees all files and folders are selected")
+    public void userSeesAllFilesAndFoldersAreSelected() {
+        List<String> listOfSelectedFolders = new ArrayList<>();
+        List<String> listOfSelectedFiles = new ArrayList<>();
+
+        for (WebElement webElement : filesPage.AllFilesFolderList) {
+            if (webElement.getAttribute("data-type").equals("dir")
+                    && webElement.getAttribute("class").equals("ui-droppable selected")) {
+                listOfSelectedFolders.add(webElement.getAttribute("data-file"));
+            }
+
+            if (webElement.getAttribute("data-type").equals("file")
+                    && webElement.getAttribute("class").equals("selected")) {
+                listOfSelectedFiles.add(webElement.getAttribute("data-file"));
+            }
+        }
+        String ActualNumbersOfSelectedFilesAndFolders = filesPage.textShowingNumbersOfSelectedFilesAndFolders.getText();
+
+        int sizeOfSelectedFolders = listOfSelectedFolders.size();
+        int sizeOfSelectedFiles = listOfSelectedFiles.size();
+
+
+        String exptectedNumbersOfSelectedFilesAndFolders = sizeOfSelectedFolders == 1 && sizeOfSelectedFiles == 1 ?
+                sizeOfSelectedFolders + " folder and " + sizeOfSelectedFiles + " file" : sizeOfSelectedFolders == 1 ?
+                sizeOfSelectedFolders + " folder and " + sizeOfSelectedFiles + " files" : sizeOfSelectedFiles == 1 ?
+                sizeOfSelectedFolders + " folders and " + sizeOfSelectedFiles + " file" : sizeOfSelectedFolders + " folders and " + sizeOfSelectedFiles + " files";
+        System.out.println("exptectedNumbersOfSelectedFilesAndFolders = " + exptectedNumbersOfSelectedFilesAndFolders);
+        System.out.println("ActualNumbersOfSelectedFilesAndFolders = " + ActualNumbersOfSelectedFilesAndFolders);
+
+        Assert.assertEquals(exptectedNumbersOfSelectedFilesAndFolders, ActualNumbersOfSelectedFilesAndFolders);
 
     }
 }
