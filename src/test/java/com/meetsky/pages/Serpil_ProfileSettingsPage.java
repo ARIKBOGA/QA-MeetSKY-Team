@@ -6,6 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Serpil_ProfileSettingsPage extends BasePage {
 
+
+  @FindBy(xpath = "//div[@class='avatardiv avatardiv-shown']")
+  public WebElement accountMenu;
+
   @FindBy(xpath = "//input[@id='displayname']")
     public WebElement profileSettingsNameBox;
 
@@ -41,6 +45,16 @@ public class Serpil_ProfileSettingsPage extends BasePage {
     @FindBy(xpath = "(//span[@class='icon-triangle-s'] )[4]")
     public WebElement phoneOptionsButton;
 
+@FindBy(xpath = "//label[.='Full name']")
+public WebElement fullNameTitle;
+
+
+  @FindBy(xpath = "//label[.='Email']")
+  public WebElement emailTitle;
+
+
+  @FindBy(xpath = "//label[.='Phone number']")
+  public WebElement phoneNumberTitle;
 
 @FindBy(xpath = "//strong[.='Private']")
 public WebElement phonePrivateOption;
