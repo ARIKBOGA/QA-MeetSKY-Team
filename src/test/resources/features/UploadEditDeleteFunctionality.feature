@@ -1,4 +1,4 @@
-@wip @UploadEditDeleteFileFeature
+@UploadEditDeleteFileFeature
 Feature: MeetSky login feature
   User story: As a user, I should be able to upload a file, move or delete any selected file under the Files module
 

@@ -1,79 +1,128 @@
 package com.meetsky.step_definitions;
 
+import com.meetsky.pages.BasePage;
+import com.meetsky.pages.LoginPage;
+import com.meetsky.pages.TalkPage;
+import com.meetsky.utilities.BrowserUtils;
+import com.meetsky.utilities.ConfigurationReader;
+import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
+
 
 public class Talk_StepDefinitions {
+
+    LoginPage loginPage = new LoginPage();
+    BasePage basePage = new BasePage();
+    TalkPage talkPage = new TalkPage();
+
+    @Given("User is logged in with valid credentials")
+    public void user_is_logged_in_with_valid_credentials() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
+        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_usernameEce"));
+        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
+        loginPage.loginButton.click();
+    }
+
     @Then("User goes to Talk page")
-    public void userGoesToTalkPage() {
+    public void user_goes_to_talk_page() {
+        basePage.talkPageLink.click();
+        Assert.assertTrue(Driver.getDriver().getTitle().equals("Talk - Meetsky - QA"));
     }
 
     @Given("User clicks to plus sign on the left side of the page")
-    public void userClicksToPlusSignOnTheLeftSideOfThePage() {
+    public void user_clicks_to_plus_sign_on_the_left_side_of_the_page() {
+        talkPage.createANewGroupConversation.click();
     }
 
-    @And("User enters the \\{work chat} conversation name")
-    public void userEntersTheWorkChatConversationName() {
+    @Given("User enters the \\{friends} conversation name")
+    public void user_enters_the_conversation_name() {
+        talkPage.conversationNameInputBox.sendKeys("friends");
     }
 
-    @Then("User clicks {string} button")
-    public void userClicksButton(String arg0) {
+    @Then("User clicks Add Participants button")
+    public void user_clicks_add_participants_button() {
+        talkPage.addParticipantsButton.click();
     }
 
-    @And("User user chooses any of the contacts from the contacts list")
-    public void userUserChoosesAnyOfTheContactsFromTheContactsList() {
+    @Then("User chooses any of the contacts from the contacts list")
+    public void user_user_chooses_any_of_the_contacts_from_the_contacts_list() {
+        talkPage.addContactAdmin.click();
+        talkPage.addContactEmployee10.click();
+        talkPage.addContactEmployee100.click();
+
+        Assert.assertTrue(talkPage.selectedParticipants.getText().contains("admin"));
+        Assert.assertTrue(talkPage.selectedParticipants.getText().contains("Employee10"));
+        Assert.assertTrue(talkPage.selectedParticipants.getText().contains("Employee100"));
     }
 
-    @Then("User verify \\{work chat} has created")
-    public void userVerifyWorkChatHasCreated() {
+    @Then("User clicks Create Conversetion button")
+    public void user_clicks_create_conversetion_button() {
+        talkPage.createConversationButton.click();
     }
 
-    @Given("User clicks to \\{work chat} group on the left side of the page")
-    public void userClicksToWorkChatGroupOnTheLeftSideOfThePage() {
+    @Then("User verify \\{friends} has created")
+    public void user_verify_has_created() {
+        Assert.assertTrue(talkPage.newChatName.getText().contains("friends"));
     }
+
+    @Given("User clicks to \\{friends} group on the left side of the page")
+    public void user_clicks_to_group_on_the_left_side_of_the_page() {
+        talkPage.newChatName.click();
+    }
+
 
     @Then("User verify that he\\/she can see the participants of the group conversation under Participants tab")
     public void userVerifyThatHeSheCanSeeTheParticipantsOfTheGroupConversationUnderParticipantsTab() {
+        Assert.assertTrue(talkPage.participantsTab.isDisplayed());
+        Assert.assertTrue(talkPage.contactAdmin.isDisplayed());
+        Assert.assertTrue(talkPage.contactEmployee10.isDisplayed());
+        Assert.assertTrue(talkPage.contactEmployee100.isDisplayed());
     }
 
     @Then("User locates the participants of the group conversation under Participants tab")
     public void userLocatesTheParticipantsOfTheGroupConversationUnderParticipantsTab() {
+        Assert.assertTrue(talkPage.participantsTab.isDisplayed());
+        Assert.assertTrue(talkPage.contactAdmin.isDisplayed());
+        Assert.assertTrue(talkPage.contactEmployee10.isDisplayed());
+        Assert.assertTrue(talkPage.contactEmployee100.isDisplayed());
     }
 
     @And("User clicks to the three dots next to participant name")
     public void userClicksToTheThreeDotsNextToParticipantName() {
+        talkPage.threeDotsParticipant.click();
     }
 
-    @And("User clicks to the {string} button")
-    public void userClicksToTheButton(String arg0) {
+    @And("User clicks to the Remove participant button")
+    public void userClicksToTheRemoveParticipantButton() {
+        talkPage.removeParticipant.click();
     }
 
     @Then("User verify the participant has been succesfully removed from the group")
     public void userVerifyTheParticipantHasBeenSuccesfullyRemovedFromTheGroup() {
+        Assert.assertFalse(talkPage.participantTable.getText().contains("admin"));
     }
 
-    @Then("User clicks to  inputbox at the bottom of the middle screen")
-    public void userClicksToInputboxAtTheBottomOfTheMiddleScreen() {
+    @Given("User clicks to three dots on the right side of the \\{friends}")
+    public void userClicksToThreeDotsOnTheRightSideOfTheFriends() {
+        talkPage.conversationThreeDots.click();
     }
 
-    @And("User types message to the inputbox and clicks enter button")
-    public void userTypesMessageToTheInputboxAndClicksEnterButton() {
+    @Then("User clicks to the Delete conversation button")
+    public void userClicksToTheDeleteConversationButton() {
+        talkPage.deleteConversationButton.click();
     }
 
-    @Then("User verify the message is displayed on the chat screen and one tick sign is visible right next to time stamp on the message")
-    public void userVerifyTheMessageIsDisplayedOnTheChatScreenAndOneTickSignIsVisibleRightNextToTimeStampOnTheMessage() {
+    @Then("User clicks to Yes button on the pop-up asking Do you really want to delete friends?")
+    public void user_clicks_to_yes_button_on_the_pop_up_asking_do_you_really_want_to_delete_friends() {
+        talkPage.yesButton.click();
     }
 
-    @Given("User clicks to three dots on the right side of the \\{work chat}")
-    public void userClicksToThreeDotsOnTheRightSideOfTheWorkChat() {
-    }
-
-    @And("User cliks to {string} button on the pop-up asking {string}work chat{string}")
-    public void userCliksToButtonOnThePopUpAskingWorkChat(String arg0, String arg1, String arg2) {
-    }
 
     @Then("User verify that deleted group conversation is not existing inside the available group conversations")
     public void userVerifyThatDeletedGroupConversationIsNotExistingInsideTheAvailableGroupConversations() {
+        Assert.assertFalse(talkPage.conversationList.getText().contains("friends"));
     }
 }
