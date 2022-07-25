@@ -1,4 +1,4 @@
-@Smoke @Regression @logout @MTSK-401
+@Regression @logout @MTSK-401
 Feature: As a user, I should be able to log out.
 
 

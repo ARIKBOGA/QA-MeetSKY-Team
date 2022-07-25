@@ -6,7 +6,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     And User logs in with valid credentials
     Then User goes to Contacts page
 
-  @MTSK-487 @Smoke
+  @MTSK-487
   Scenario Outline: User can create a new contact with all properties filled with valid inputs
     Given User clicks to new contact button
     And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<City>" "<Country>" properties out
@@ -33,7 +33,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     And User clicks to Choose button
     Then User should be able to see the PP has been changed
 
-  @MTSK-490 @Smoke
+  @MTSK-490
   Scenario: User can delete any selected contact
     Given User clicks to All contacts link
     And User clicks to a random contact in the middle column

@@ -14,6 +14,7 @@ public class FilesBasePage {
     @FindBy(xpath = "//tbody/tr[3]/td[2]/a[1]/span[2]/a[2]")
     public WebElement threeDotNextToFile;
 
+
     @FindBy(xpath = "//span[contains(text(),'Add to favorites')]")
     public WebElement addToFavoritesDropDown;
 

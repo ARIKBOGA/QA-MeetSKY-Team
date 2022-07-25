@@ -1,4 +1,4 @@
-@Smoke @Regression @login @MTSK-372
+@Regression @login @MTSK-372
 Feature: As a user, I should be able to login.
 
   @PositiveScenario  @ValidLogin @MTSK-373
