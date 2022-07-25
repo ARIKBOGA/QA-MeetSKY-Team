@@ -20,6 +20,7 @@ Feature:Calendar Module Functionality
     Given User clicks on calendar page link
     When User clicks on action item and monthly action button
     Then User should be display monthly calendar view
+    
 @wip
   Scenario Outline: User can create new event under the calendar module and see it on the related day
              through the monthly calendar view
@@ -32,8 +33,3 @@ Feature:Calendar Module Functionality
     |vacation        | from 30/07/2022          | to 31/07/2022         |
     |sprint planning | from 15/08/2022 at 14:00 | to 15/08/2022 at 15:00|
     |report date     | from 01/01/2023 at 08:00 | to 01/01/2023 at 12:00|
-
-
-
-
-
