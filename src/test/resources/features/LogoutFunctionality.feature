@@ -1,8 +1,8 @@
-@Smoke @Regression @logout @MTSK-401
+@Regression @logout @MTSK-401
 Feature: As a user, I should be able to log out.
 
 
-  @MTSK-399
+  @Smoke @MTSK-399
   Scenario: User can log out and ends up in login page
     Given User logs in with valid credentials
     Given User click to settings expand button on top-right corner
