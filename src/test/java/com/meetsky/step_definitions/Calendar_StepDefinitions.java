@@ -37,6 +37,7 @@ public class Calendar_StepDefinitions {
 
             calendarPage.ActionItemButton.click();
             calendarPage.DailyActionButton.click();
+            BrowserUtils.waitFor(2);
         }
 
     @Then("User should be display daily calendar view")
@@ -46,9 +47,10 @@ public class Calendar_StepDefinitions {
 
     @When("User clicks on action item  and weekly action button")
     public void userClicksOnActionItemAndWeeklyActionButton () {
-        BrowserUtils.waitFor(2);
+
             calendarPage.ActionItemButton.click();
             calendarPage.WeeklyActionButton.click();
+            BrowserUtils.waitFor(2);
         }
 
     @Then("User should be display weekly calendar view")
@@ -60,6 +62,7 @@ public class Calendar_StepDefinitions {
     public void userClicksOnActionItemAndMonthlyActionButton () {
             calendarPage.ActionItemButton.click();
             calendarPage.MonthlyActionButton.click();
+            BrowserUtils.waitFor(2);
         }
 
     @Then("User should be display monthly calendar view")
@@ -70,5 +73,50 @@ public class Calendar_StepDefinitions {
     @When("User clicks on new event button on the left side")
     public void userClicksOnNewEventButtonOnTheLeftSide() {
         calendarPage.NewEventButton.click();
+    }
+
+    @And("User types {string}, {string}, {string}  as event")
+    public void userTypesAsEvent(String title, String startDate, String endDate) {
+        calendarPage.EventTitleInputBox.clear();
+        calendarPage.EventTitleInputBox.sendKeys(title);
+        calendarPage.DateInputBox.clear();
+        calendarPage.DateInputBox.sendKeys(startDate);
+        calendarPage.DateInputBox2.clear();
+        calendarPage.DateInputBox2.sendKeys(endDate);
+        calendarPage.SaveButton.click();
+        BrowserUtils.waitFor(2);
+    }
+
+    @Then("User should be able to create new event")
+    public void userShouldBeAbleToCreateNewEvent() {
+        String expectEventTitle1 ="vacation";
+        String expectEventTitle2 ="sprint planning";
+        String expectEventTitle3 ="report date";
+        calendarPage.ActionItemButton.click();
+        calendarPage.MonthlyActionButton.click();
+        calendarPage.ThirtiethDayLink.click();
+        BrowserUtils.sleep(3);
+        Assert.assertTrue(calendarPage.createdEventTitle1.isDisplayed());
+        Assert.assertEquals(expectEventTitle1,calendarPage.createdEventTitle1.getText());
+
+        calendarPage.ActionItemButton.click();
+        calendarPage.MonthlyActionButton.click();
+        calendarPage.NextMonthButton.click();
+        calendarPage.FifteenthDayLink.click();
+        Assert.assertTrue(calendarPage.createdEventTitle2.isDisplayed());
+        Assert.assertEquals(expectEventTitle1,calendarPage.createdEventTitle2.getText());
+
+        calendarPage.ActionItemButton.click();
+        calendarPage.MonthlyActionButton.click();
+
+        while(!(calendarPage.DatePickerButton.getText()).equals("January 2023")){
+            calendarPage.NextMonthButton.click();
+        }
+
+        calendarPage.FirstDayLink.click();
+        Assert.assertTrue(calendarPage.createdEventTitle3.isDisplayed());
+        Assert.assertEquals(expectEventTitle1,calendarPage.createdEventTitle3.getText());
+
+
     }
 }
