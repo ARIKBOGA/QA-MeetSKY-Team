@@ -4,7 +4,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
   Background: User logs in
     Given User goes to login page
     And User logs in with valid credentials
-    #Then User goes to Contacts page
+    Then User goes to Contacts page
 
   @MTSK-487 @Smoke
   Scenario Outline: User can create a new contact with all properties filled with valid inputs
@@ -70,10 +70,3 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
       | Full name     | Company | Title   | Phone      | Email             | City   | Country |
       | Didier Drogba | Cydeo   | QA      | 8764756387 | ddrogba@gmail.com | London | England |
       | Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |
-
-  @time
-  Scenario:
-    Given user is on th homepage
-    When user clicks on account menu
-    And user clicks on accountMenuSettingsButton
-    Then user should see the current local time under the local dropdown

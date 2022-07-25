@@ -9,9 +9,8 @@ Feature:Profile Settings Functionality
   #User can see the current local time under the Local dropdown
 
  Background:
-   Given user is on the login page
-   And user enters valid credentials
-   Then user should see homepage
+   Given User goes to login page
+   Then User logs in with valid credentials
 
 
 
@@ -43,6 +42,7 @@ Feature:Profile Settings Functionality
       And user clicks on confirm button
       Then phone should be private
 
+      @MTSK-554
       Scenario:User can see the current local time under the Local dropdown
         Given user is on th homepage
         When user clicks on account menu

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
                 "junit:target/cucumber-report.xml",
                 "rerun:target/rerun.txt"
         },
-        tags = "@time"      // This must be assigned with Test Execution ticket number from JIRA in order to run all scenarios
+        tags = "@MTSK-554"      // This must be assigned with Test Execution ticket number from JIRA in order to run all scenarios
                           // and get their "cucumber.json" report to export to the JIRA at the end.
 )
 
