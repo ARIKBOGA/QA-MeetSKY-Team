@@ -16,7 +16,7 @@ Feature:Profile Settings Functionality
    Then user should see homepage
 
 
-@MTSK-551
+@MTSK-551 @Smoke
   Scenario:User can see at least following titles inside personal info under Profile Settings page;
   =>Full name/Email/Phone Number
     Given user is on the homepage
