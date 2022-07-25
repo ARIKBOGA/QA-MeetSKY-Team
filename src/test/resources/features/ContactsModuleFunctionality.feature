@@ -34,7 +34,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     And User clicks to Choose button
     Then User should be able to see the PP has been changed
 
-  @MTSK-490 @Smoke
+  @MTSK-490
   Scenario: User can delete any selected contact
     Given User clicks to All contacts link
     And User clicks to a random contact in the middle column
