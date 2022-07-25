@@ -2,3 +2,5 @@
 target
 .iml*
 .DS_Store*
+com/meetsky/runners/CukesRunner.java
+configuration.properties

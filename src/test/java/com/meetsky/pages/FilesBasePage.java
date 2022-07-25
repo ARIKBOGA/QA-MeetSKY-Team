@@ -11,7 +11,7 @@ public class FilesBasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(xpath = "//tbody/tr[3]/td[2]/a[1]/span[2]/a[2]")
+    @FindBy(xpath = "//*[@id=\"fileList\"]/tr[3]/td[2]/a/span[2]/a[2]") ////tbody/tr[3]/td[2]/a[1]/span[2]/a[2]
     public WebElement threeDotNextToFile;
 
 
