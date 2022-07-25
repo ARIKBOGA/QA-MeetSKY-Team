@@ -1,4 +1,4 @@
-@MTSK-480 @Smoke @Regresion
+@MTSK-480 @Regresion
 Feature:Profile Settings Functionality
   User Story :
   As a user, I should be able to change profile info settings under the Profile module
