@@ -1,4 +1,4 @@
-@wip
+@MTSK-536
 Feature: Folder View Functionality [AutomationS4]
   As a user, I should be able to change folder view order by using Name/Size/Modified buttons
 
@@ -9,21 +9,21 @@ Feature: Folder View Functionality [AutomationS4]
     And User clicks on login button
     Then User should be logged in
 
-  @MTSK-493
+  @MTSK-493 @smoke
   Scenario: User can change folder view order by Name
     Given User toggles list view
     When User clicks Name link
     And User scrolls to button of page to load all items
     Then User sees Files and Folders in an order according to their Names
 
-  @MTSK-494
+  @MTSK-494 @smoke
   Scenario: User can change folder view order by Size
     Given User toggles list view
     When User clicks Size link
     And User scrolls to button of page to load all items
     Then User sees Files and Folders in an order according to their Size
 
-  @MTSK-533
+  @MTSK-533 @smoke
   Scenario: User can change folder view order by Modified
     Given User toggles list view
     When User clicks Modified link
