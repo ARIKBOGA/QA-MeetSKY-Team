@@ -12,11 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OnlineStatusFunctionality_StepDefinitions {
     OnlineStatusFunctionalityPage onlineStatusFunctionalityPage = new OnlineStatusFunctionalityPage();
-    @Given("User is logged in with valid credentials")
-    public void userIsLoggedInWithValidCredentials() {
-        Driver.getDriver().get("https://qa.meetsky.net/index.php/login");
-        Driver.getDriver().findElement(By.id("user")).sendKeys("Employee41");Driver.getDriver().findElement(By.id("password")).sendKeys("Employee123");Driver.getDriver().findElement(By.id("submit-form")).click();
-    }
 
     @Then("User goes to home page")
     public void userGoesToHomePage() {
