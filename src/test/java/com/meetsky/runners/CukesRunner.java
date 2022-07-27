@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com/meetsky/step_definitions",
-        dryRun = true,
+        //dryRun = true,
         plugin = {
                 "pretty",
                 "html:target/cucumber-report.html",
@@ -17,7 +17,8 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt"
         },
 
-        tags = "@MTSK-488"      // This must be assigned with Test Execution ticket number from JIRA in order to run all scenarios
+
+        tags = "@Smoke"      // This must be assigned with Test Execution ticket number from JIRA in order to run all scenarios
         // and get their "cucumber.json" report to export to the JIRA at the end.
 
 )

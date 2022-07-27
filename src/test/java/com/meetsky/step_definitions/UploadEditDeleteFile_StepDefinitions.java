@@ -2,24 +2,23 @@ package com.meetsky.step_definitions;
 
 import com.meetsky.pages.LoginPage;
 import com.meetsky.pages.UploadEditDeleteFilePage;
-import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UploadEditDeleteFile_StepDefinitions {
 
-    UploadEditDeleteFilePage uploadEditDeleteFilePage = new UploadEditDeleteFilePage();
     protected LoginPage loginPageBurak = new LoginPage();
+    UploadEditDeleteFilePage uploadEditDeleteFilePage = new UploadEditDeleteFilePage();
 
-
- 
     @Given("user is on the Files module of MeetSky application, and dashboard page does not have any file.")
     public void userIsOnTheFilesModuleOfMeetSkyApplication() {
         Assert.assertTrue(Driver.getDriver().getTitle().equals("Files - Meetsky - QA"));

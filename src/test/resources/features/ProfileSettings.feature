@@ -10,12 +10,12 @@ Feature:Profile Settings Functionality
   #User can see the current local time under the Local dropdown
 
 
- Background:user logs in
-   Given User logs in with valid credentials "Employee31"
-   Then user should see homepage
+  Background:user logs in
+    Given User logs in with valid credentials "Employee31"
+    Then user should see homepage
 
 
-@MTSK-551 @Smoke
+  @MTSK-551 @Smoke
   Scenario:User can see at least following titles inside personal info under Profile Settings page;
   =>Full name/Email/Phone Number
     Given user is on the homepage
@@ -33,21 +33,21 @@ Feature:Profile Settings Functionality
     When user enters a new full name "newEmployee" inside full name box
     Then user should see new Full name "newEmployee" inside the full name box and on the profile
 
-    @MTSK-553
-    Scenario:User can make "Phone number" info as private under Profile Settings page
-      Given user is on the homepage
-      When user clicks on account menu
-      And user clicks on accountMenuSettingsButton
-      And user clicks on phoneOptionsButton
-      And user selects phonePrivateOption
+  @MTSK-553
+  Scenario:User can make "Phone number" info as private under Profile Settings page
+    Given user is on the homepage
+    When user clicks on account menu
+    And user clicks on accountMenuSettingsButton
+    And user clicks on phoneOptionsButton
+    And user selects phonePrivateOption
    #  Then user should see notice message as "Authentication required"
     #  And user enters valid password in the AuthenticationInputBox
      # And user clicks on confirm button
-      Then phone should be private
+    Then phone should be private
 
   @MTSK-554
-      Scenario:User can see the current local time under the Local dropdown
-        Given user is on the homepage
-        When user clicks on account menu
-        And user clicks on accountMenuSettingsButton
-        Then user should see the current local time under the local dropdown
+  Scenario:User can see the current local time under the Local dropdown
+    Given user is on the homepage
+    When user clicks on account menu
+    And user clicks on accountMenuSettingsButton
+    Then user should see the current local time under the local dropdown

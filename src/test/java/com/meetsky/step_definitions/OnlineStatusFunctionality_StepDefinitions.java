@@ -6,7 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -72,7 +71,6 @@ public class OnlineStatusFunctionality_StepDefinitions {
     }
 
 
-
     @Then("the user clicks sick")
     public void theUserClicksSick() {
         onlineStatusFunctionalityPage.SickEmoji.click();
@@ -109,13 +107,13 @@ public class OnlineStatusFunctionality_StepDefinitions {
     public void userClicksTheClearStatusAfterButtonToClearTheStatusMessageAutomaticallyAndCanSetATime() {
         onlineStatusFunctionalityPage.SetStatusPage.isDisplayed();
         onlineStatusFunctionalityPage.SickEmoji.click();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);     wait.until(ExpectedConditions.elementToBeClickable(onlineStatusFunctionalityPage.ClearAtSelect));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+        wait.until(ExpectedConditions.elementToBeClickable(onlineStatusFunctionalityPage.ClearAtSelect));
 
         onlineStatusFunctionalityPage.ClearAtSelect.click();
         onlineStatusFunctionalityPage.minutes30.click();
         onlineStatusFunctionalityPage.SetStatusMessageButton.click();
     }
-
 
 
     @Then("user click set status button")
