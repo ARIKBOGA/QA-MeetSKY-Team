@@ -38,9 +38,9 @@ public class ProfileSettings_StepDefinitions extends BrowserUtils {
 
     @Given("user logs in with valid credentials {string}")
     public void userLogsInWithValidCredentials(String username) {
-        loginPage.usernameBox.sendKeys(username);
-        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
-        loginPage.loginButton.click();
+        loginPage.usernameBox.sendKeys(username,ConfigurationReader.getProperty("valid_password"));
+
+
 
 
     }
