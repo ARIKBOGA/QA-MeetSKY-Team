@@ -3,8 +3,7 @@ Feature:Calendar Module Functionality
   User Story: As a user, I should be able to see daily-weekly-monthly calendar view
               and create a new event under the calendar module
   Background:
-    Given User goes to login page
-    When User enters "Employee1" and "Employee123" and clicks on login button
+    Given User logs in with valid credentials "Employee1"
     Then User should be logged in
 
     @MTSK-557 @smoke

@@ -20,12 +20,6 @@ public class Calendar_StepDefinitions {
     CalendarPage calendarPage = new CalendarPage();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 
-    @When("User enters {string} and {string} and clicks on login button")
-    public void userEntersAndAndClicksOnLoginButton(String username, String password) {
-        loginPage.usernameBox.sendKeys(username);
-        loginPage.passwordBox.sendKeys(password);
-        loginPage.loginButton.click();
-    }
 
     @When("User clicks on calendar page link")
     public void userClicksOnCalendarPageLink () {
@@ -160,13 +154,3 @@ public class Calendar_StepDefinitions {
 
 
 }
-
-
-
-
-
-
-
-
-
-
