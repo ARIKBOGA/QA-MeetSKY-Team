@@ -31,38 +31,41 @@ public class CalendarPage extends BasePage{
     @FindBy(xpath="//button[@class='button primary new-event']")
     public WebElement NewEventButton;
 
-    @FindBy(xpath="//input[@placeholder='Event title']")
-    public WebElement EventTitleInputBox;
+    //@FindBy(xpath="//input[@placeholder='Event title']")
+    //public WebElement EventTitleInputBox;
 
-    @FindBy(xpath="(//div[@class='property-title-time-picker']//input)[1]")
-    public WebElement DateInputBox;
+    @FindBy(css = ".property-title__input>input")
+    public WebElement title;
 
-    @FindBy(xpath="(//div[@class='property-title-time-picker']//input)[2]")
-    public WebElement DateInputBox2;
+    @FindBy(xpath="(//input[@name='date'])[2]")
+    public WebElement startDate;
+
+    @FindBy(xpath="(//input[@name='date'])[3]")
+    public WebElement endDate;
 
     @FindBy(xpath="//input[@id='allDay']")
     public WebElement AllDayButton;
 
     @FindBy(xpath="//td[@title='2022-07-30']")
-    public WebElement ThirtiethDayButton;
+    public WebElement DatePickerThirty;
 
     @FindBy(xpath="//td[@title='2022-07-31']")
-    public WebElement ThirtyFirstDayButton;
+    public WebElement DatePickerThirtyOne;
 
     @FindBy(xpath="//td[@title='2022-08-15']")
     public WebElement DayAugustFifteenthButton;
 
-    @FindBy(xpath="//div[@class='fc-event-title fc-sticky']")
-    public WebElement createdEventTitle1;
+    @FindBy(xpath="//div[contains(@class,'fc-sticky')]")
+    public WebElement DailyEventTitle;
 
     @FindBy(xpath="(((//table[@class='fc-scrollgrid-sync-table']/tbody/tr)[5]/td)[6]//a)")
     public WebElement ThirtiethDayLink;
 
-    @FindBy(xpath="//div[@class='fc-event-title fc-sticky']")
-    public WebElement createdEventTitle2;
+    @FindBy(xpath="((((//table[@class='fc-scrollgrid-sync-table']/tbody/tr)[5]/td)[6]//a)[2])//div[3]")
+    public WebElement createdEventTitle;
 
-    @FindBy(xpath="//a[@data-recurrence-id='1659139200']")
-    public WebElement createdEventLink1;
+    @FindBy(xpath="(((//table[@class='fc-scrollgrid-sync-table']/tbody/tr)[5]/td)[6]//a)[2]")
+    public WebElement createdEventLink;
 
     @FindBy(xpath="((//table[@class='fc-scrollgrid-sync-table']/tbody/tr)[3]/td)//a")
     public WebElement FifteenthDayLink;
@@ -76,16 +79,16 @@ public class CalendarPage extends BasePage{
     @FindBy(xpath="//a[@data-recurrence-id='1672549200']")
     public WebElement createdEventLink3;
 
-    @FindBy(xpath="//div[@class='fc-event-title fc-sticky']")
-    public WebElement createdEventTitle3;
-
-    @FindBy(xpath="(//button[contains(@class,'menutoggle--default-icon')])[4]")
+    @FindBy(xpath="(//button[contains(@class,'menutoggle--default-icon')])[5]")
     public WebElement eventActionItemButton;
 
-    @FindBy(xpath="(//button[@class='primary'])[1]")
-    public WebElement SaveButton;
+    @FindBy(css = ".event-popover__buttons>button[class='primary']")
+    public  WebElement SaveButton;
 
-    @FindBy(xpath="//span[@class='action-button__icon icon-delete']/..")
+    @FindBy(xpath="//div[@class='event-popover__buttons']//button")
+    public WebElement MoreButton;
+
+    @FindBy(css=".action.active>button")
     public WebElement DeleteButton;
 
     @FindBy(xpath="//button[@title='Next month']")
@@ -94,7 +97,40 @@ public class CalendarPage extends BasePage{
     @FindBy(xpath="(//div[@class='datepicker-button-section']/button)[2]")
     public WebElement DatePickerButton;
 
+   // @FindBy(xpath="(//table[@class='mx-table mx-table-date']/tbody/tr[5]/td)[6]")
+   // public WebElement DatePickerThirty;
 
+    //@FindBy(xpath="(//table[@class='mx-table mx-table-date']/tbody/tr[5]/td)[7]")
+    //public WebElement DatePickerThirtyOne;
+
+    @FindBy(xpath="//span[@class='mx-calendar-header-label']/button[2]")
+    public WebElement DatePickerYear;
+
+    @FindBy(xpath="//span[@class='mx-calendar-header-label']/button[1]")
+    public WebElement DatePickerMonth;
+
+    @FindBy(xpath="//table[contains(@class,'mx-table-year')]/tr[2]/td[2]")
+    public WebElement YearSelectBtn;
+
+    @FindBy(xpath="//table[contains(@class,'mx-table-month')]/tr[3]/td[3]")
+    public WebElement MonthSelectBtn;
+
+    @FindBy(xpath="//table[contains(@class,'mx-table-date')]/tbody/tr[1]/td[7]")
+    public WebElement FirstDaySelectBtn;
+
+    @FindBy(xpath="//div[@class='mx-datepicker-footer']//button")
+    public WebElement PickTimeBtn;
+
+    @FindBy(xpath="(((//table[@class='fc-scrollgrid-sync-table']/tbody/tr)[5]/td)[6]//div)[3]")
+    public WebElement eventBox;
+
+
+
+
+
+
+
+//hour list=((//ul[@class='mx-time-list'])[1])//li[9]
     public CalendarPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
