@@ -28,11 +28,11 @@ public class Talk_StepDefinitions {
         talkPage.createANewGroupConversation.click();
     }
 
-    @Given("User enters the \\{friends} conversation name")
-    public void user_enters_the_conversation_name() {
+    @Given("User enters the {string} conversation name")
+    public void userEntersTheConversationName(String arg0) {
         talkPage.conversationNameInputBox.sendKeys("friends");
     }
-
+    
     @Then("User clicks Add Participants button")
     public void user_clicks_add_participants_button() {
         talkPage.addParticipantsButton.click();
@@ -49,22 +49,21 @@ public class Talk_StepDefinitions {
         Assert.assertTrue(talkPage.selectedParticipants.getText().contains("Employee100"));
     }
 
-    @Then("User clicks Create Conversetion button")
-    public void user_clicks_create_conversetion_button() {
+    @Then("User clicks Create Conversation button")
+    public void user_clicks_create_conversation_button() {
         talkPage.createConversationButton.click();
     }
 
-    @Then("User verify \\{friends} has created")
-    public void user_verify_has_created() {
+    @Then("User verify {string} has created")
+    public void userVerifyHasCreated(String arg0) {
         Assert.assertTrue(talkPage.newChatName.getText().contains("friends"));
     }
 
-    @Given("User clicks to \\{friends} group on the left side of the page")
-    public void user_clicks_to_group_on_the_left_side_of_the_page() {
-        talkPage.newChatName.click();
+    @Given("User clicks to {string} group on the left side of the page")
+    public void userClicksToGroupOnTheLeftSideOfThePage(String arg0)
+    {talkPage.newChatName.click();
     }
-
-
+    
     @Then("User verify that he or she can see the participants of the group conversation under Participants tab")
     public void userVerifyThatHeSheCanSeeTheParticipantsOfTheGroupConversationUnderParticipantsTab() {
         Assert.assertTrue(talkPage.participantsTab.isDisplayed());
@@ -96,10 +95,10 @@ public class Talk_StepDefinitions {
         Assert.assertFalse(talkPage.participantTable.getText().contains("admin"));
     }
 
-    @Given("User clicks to three dots on the right side of the \\{friends}")
-    public void userClicksToThreeDotsOnTheRightSideOfTheFriends() {
-        talkPage.conversationThreeDots.click();
-    }
+    @Given("User clicks to three dots on the right side of the {string}")
+    public void userClicksToThreeDotsOnTheRightSideOfThe(String arg0) {
+        talkPage.conversationThreeDots.click();}
+
 
     @Then("User clicks to the Delete conversation button")
     public void userClicksToTheDeleteConversationButton() {
@@ -116,4 +115,7 @@ public class Talk_StepDefinitions {
     public void userVerifyThatDeletedGroupConversationIsNotExistingInsideTheAvailableGroupConversations() {
         Assert.assertFalse(talkPage.conversationList.getText().contains("friends"));
     }
+
+
+
 }
