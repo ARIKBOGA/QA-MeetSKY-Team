@@ -2,25 +2,25 @@
 Feature: As a user, I should be able to create a new contact and edit/delete any contact under Contacts module
 
   Background: User logs in
-    Given User goes to login page
-    And User logs in with valid credentials
+    Given User logs in with valid credentials "Employee155"
     Then User goes to Contacts page
 
   @MTSK-487
   Scenario Outline: User can create a new contact with all properties filled with valid inputs
     Given User clicks to new contact button
     And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<City>" "<Country>" properties out
-    Then User clicks to All contacts link
+    Then User should be able to see new created contact
     Examples:
-      | Full name     | Company | Title | Phone      | Email             | City   | Country |
-      | Didier Drogba | Cydeo   | QA    | 8764756387 | ddrogba@gmail.com | London | England |
+      | Full name     | Company | Title   | Phone      | Email             | City   | Country |
+      | Didier Drogba | Cydeo   | QA      | 8764756387 | ddrogba@gmail.com | London | England |
+      | Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |
 
   @MTSK-488
   Scenario: User can see all the contacts as a list inside the middle column and
   total number of the contacts near the “All Contacts” tab
     Given User clicks to All contacts link
     Then User should be able to see all contacts in the middle column
-    Then User should be able to se the correct number near the “All Contacts” tab
+    Then User should be able to see the correct number near the “All Contacts” tab
 
   @MTSK-489
   Scenario: User can change the profile picture of any contact with a
@@ -40,3 +40,32 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     And User clicks to Three dot menu link
     And User clicks to Delete button
     Then User should be able to see the contact has been deleted
+
+
+  @MTSK-502
+  Scenario: User shouldn't be able to create a new contact with invalid inputs
+    Given User clicks to new contact button
+    And User fills these properties out
+      | Fullname | ^^*09.-A   |
+      | Company  | ;!74jds_,  |
+      | Title    | 5345gb     |
+      | Phone    | dgbs*&gbdg |
+      | Email    | Edfbb4-+   |
+      | City     | 345:&      |
+      | Country  | %*-3"      |
+    Then User should see warning message
+    Then User shouldn't be able to see new created contact
+
+  @wip
+  Scenario Outline: User can create a new contact with all properties filled with valid inputs
+    Given User clicks to new contact button
+    And User selects these options
+      | Email          | Work   |
+      | Social network | GitHub |
+      | Phone          | Car    |
+    And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<City>" "<Country>" properties out
+    Then User should be able to see new created contact
+    Examples:
+      | Full name     | Company | Title   | Phone      | Email             | City   | Country |
+      | Didier Drogba | Cydeo   | QA      | 8764756387 | ddrogba@gmail.com | London | England |
+      | Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |

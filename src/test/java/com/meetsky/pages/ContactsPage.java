@@ -172,6 +172,9 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//div[@class='vue-recycle-scroller__item-view']")
     public List<WebElement> contactsInTheMiddleColumn;
 
+    @FindBy(xpath = "//div[@class='vue-recycle-scroller__item-view']/div/div[2]")
+    public List<WebElement> contactsInTheMiddleColumnForText;
+
     @FindBy(xpath = "//button[@class='icon action-item__menutoggle icon-picture-force-white']")
     public WebElement changePictureButton;
 
@@ -190,7 +193,7 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//body/div[5]/div[2]/div[1]/img[1]")
     public WebElement expandedProfilePicture;
 
-    @FindBy(xpath ="//div[@class='action-item header-menu']//button")
+    @FindBy(xpath = "//div[@class='action-item header-menu']//button")
     public WebElement threeDotsMenuButton;
 
     @FindBy(xpath = "//div[@class='popover vue-popover-theme open']//li[3]")
