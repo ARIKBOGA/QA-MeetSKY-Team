@@ -328,7 +328,7 @@ Feature: MeetSky login feature
     And user opens the folder
     Then user see that newly created folder and text document are there
 
-  @MTSK-525 @DeleteAFolder @Smoke
+  @MTSK-525 @DeleteAFolder
   Scenario: User can delete a folder
     Given user is on the Files module of MeetSky application, and dashboard page does not have any file.
     When user clicks the plus icon top left of the page
