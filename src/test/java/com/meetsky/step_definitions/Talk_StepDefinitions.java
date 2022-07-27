@@ -18,13 +18,6 @@ public class Talk_StepDefinitions {
     BasePage basePage = new BasePage();
     TalkPage talkPage = new TalkPage();
 
-    @Given("User is logged in with valid credentials")
-    public void user_is_logged_in_with_valid_credentials() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
-        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_usernameEce"));
-        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
-        loginPage.loginButton.click();
-    }
 
     @Then("User goes to Talk page")
     public void user_goes_to_talk_page() {

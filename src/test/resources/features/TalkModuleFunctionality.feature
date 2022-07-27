@@ -1,11 +1,11 @@
 @MTSK-542
 Feature: As a user, I should be able to create/delete conversation groups and chat with other co-workers under Talk Module
 
-  Background:
-    Given User is logged in with valid credentials
+  Background: User logs in
+    Given User logs in with valid credentials "Employee51"
     Then User goes to Talk page
 
-@MTSK-538
+@MTSK-538 @Smoke
   Scenario: User can create a new group conversation by adding other users
     Given User clicks to plus sign on the left side of the page
     Given User enters the {friends} conversation name
@@ -28,7 +28,7 @@ Feature: As a user, I should be able to create/delete conversation groups and ch
     Then User verify the participant has been succesfully removed from the group
 
 
-@MTSK-541
+@MTSK-541 @Smoke
   Scenario: User can delete any group conversation previously created
     Given User clicks to three dots on the right side of the {friends}
     Then User clicks to the Delete conversation button
