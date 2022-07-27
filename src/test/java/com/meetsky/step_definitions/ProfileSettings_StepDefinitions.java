@@ -19,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.LocalDateTime;
 
-public class ProfileSettings_StepDefinitions extends BrowserUtils {
+public class ProfileSettings_StepDefinitions implements BrowserUtils {
 
     LoginPage loginPage = new LoginPage();
     Serpil_ProfileSettingsPage profileSettingsPage = new Serpil_ProfileSettingsPage();
@@ -91,19 +91,19 @@ public class ProfileSettings_StepDefinitions extends BrowserUtils {
 
     @When("user enters a new full name {string} inside full name box")
     public void userEntersANewFullNameInsideFullNameBox(String newFullName) throws InterruptedException {
-        newFullName= "newEmployee";
+        newFullName = "newEmployee";
         profileSettingsPage.profileSettingsNameBox.clear();
-         // wait(3000);
-        profileSettingsPage.profileSettingsNameBox.sendKeys(newFullName+ Keys.ENTER);
-      //  profileSettingsPage.nameAuthenticationInputBox.sendKeys("Employee123");
-      //  profileSettingsPage.nameAuthenticationConfirmButton.click();
+        // wait(3000);
+        profileSettingsPage.profileSettingsNameBox.sendKeys(newFullName + Keys.ENTER);
+        //  profileSettingsPage.nameAuthenticationInputBox.sendKeys("Employee123");
+        //  profileSettingsPage.nameAuthenticationConfirmButton.click();
     }
 
     @Then("user should see new Full name {string} inside the full name box and on the profile")
     public void userShouldSeeNewFullNameInsideTheFullNameBoxAndOnTheProfile(String newFullName) {
-newFullName="newEmployee";
+        newFullName = "newEmployee";
 
-      waitFor(4);
+        BrowserUtils.waitFor(4);
         String actualNameOnNameBox = profileSettingsPage.profileSettingsNameBox.getAttribute("value");
         Assert.assertEquals(newFullName, actualNameOnNameBox);
 
@@ -121,30 +121,30 @@ newFullName="newEmployee";
 
     }
 
-  /*  @Then("user should see notice message as {string}")
-    public void user_should_see_notice_message_as(String noticeMessage) {
-        String actualNoticeMessage = profileSettingsPage.phoneAuthenticationNoticeMessage.getText();
-        Assert.assertEquals(noticeMessage, actualNoticeMessage);
+    /*  @Then("user should see notice message as {string}")
+      public void user_should_see_notice_message_as(String noticeMessage) {
+          String actualNoticeMessage = profileSettingsPage.phoneAuthenticationNoticeMessage.getText();
+          Assert.assertEquals(noticeMessage, actualNoticeMessage);
 
-    }
+      }
 
-    @And("user enters valid password in the AuthenticationInputBox")
-    public void userEntersValidPasswordInTheAuthenticationInputBox() {
-        profileSettingsPage.phoneAuthenticationInputBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
-    }
+      @And("user enters valid password in the AuthenticationInputBox")
+      public void userEntersValidPasswordInTheAuthenticationInputBox() {
+          profileSettingsPage.phoneAuthenticationInputBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
+      }
 
-    @Then("user clicks on confirm button")
-    public void user_clicks_on_confirm_button() {
-        profileSettingsPage.phoneAuthenticationConfirmButton.click();
-    }
-*/
+      @Then("user clicks on confirm button")
+      public void user_clicks_on_confirm_button() {
+          profileSettingsPage.phoneAuthenticationConfirmButton.click();
+      }
+  */
     @Then("phone should be private")
     public void phone_should_be_private() {
 
-        WebElement privateOptionText=
+        WebElement privateOptionText =
                 Driver.getDriver().findElement(By.xpath("//input[@id='phonescope']"));
-String actual= privateOptionText.getAttribute("value");
-Assert.assertEquals("private",actual);
+        String actual = privateOptionText.getAttribute("value");
+        Assert.assertEquals("private", actual);
     }
 
 
@@ -152,7 +152,7 @@ Assert.assertEquals("private",actual);
     public void user_should_see_the_current_local_time_under_the_local_dropdown() {
 
 
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         WebElement webElement = Driver.getDriver().findElement(By.xpath("//span[@id='localeexample-time']"));
 
         wait.until(ExpectedConditions.visibilityOf(webElement));
