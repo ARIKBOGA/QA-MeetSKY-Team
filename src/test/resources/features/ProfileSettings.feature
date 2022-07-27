@@ -10,9 +10,8 @@ Feature:Profile Settings Functionality
   #User can see the current local time under the Local dropdown
 
 
- Background:user is on the login page
-   Given user is on the login page
-   And user enters valid credentials
+ Background:user logs in
+   Given user logs in with valid credentials "Employee31"
    Then user should see homepage
 
 

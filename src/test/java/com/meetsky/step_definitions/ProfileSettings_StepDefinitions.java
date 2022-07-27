@@ -24,6 +24,9 @@ public class ProfileSettings_StepDefinitions implements BrowserUtils {
     LoginPage loginPage = new LoginPage();
     Serpil_ProfileSettingsPage profileSettingsPage = new Serpil_ProfileSettingsPage();
 
+
+
+
     @Given("user is on the login page")
     public void user_is_on_the_login_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
@@ -33,12 +36,15 @@ public class ProfileSettings_StepDefinitions implements BrowserUtils {
         Assert.assertEquals(expectedTitle, actualTitle);
     }
 
-    @Given("user enters valid credentials")
-    public void user_enters_valid_credentials() {
-        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_username"));
-        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
-        loginPage.loginButton.click();
+    @Given("user logs in with valid credentials {string}")
+    public void userLogsInWithValidCredentials(String username) {
+        loginPage.usernameBox.sendKeys(username,ConfigurationReader.getProperty("valid_password"));
+
+
+
+
     }
+
 
     @Then("user should see homepage")
     public void user_should_see_homepage() {
@@ -168,4 +174,5 @@ public class ProfileSettings_StepDefinitions implements BrowserUtils {
         //Assert.assertEquals(expectedTime, actualTime);
 
     }
+
 }
