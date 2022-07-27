@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
         glue = "com/meetsky/step_definitions",
         //dryRun = true,
         plugin = {
-                "pretty",
                 "html:target/cucumber-report.html",
                 "json:target/cucumber-report.json",
                 "junit:target/cucumber-report.xml",
