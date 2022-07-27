@@ -8,11 +8,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -21,8 +26,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class Contacts_StepDefinition {
 
-    private ContactsPage contactsPage = new ContactsPage();
     private static final WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    private ContactsPage contactsPage = new ContactsPage();
     private int totalContacts;
     private WebElement contactWillBeDeleted;
     private String newContactName;
@@ -162,6 +167,7 @@ public class Contacts_StepDefinition {
 
     @Then("User should be able to see new created contact")
     public void userShouldBeAbleToSeeNewCreatedContact() {
+        BrowserUtils.waitFor(3);
         Assert.assertTrue(BrowserUtils
                 .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
                 .contains(newContactName));

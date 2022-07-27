@@ -2,11 +2,14 @@ package com.meetsky.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class Serpil_ProfileSettingsPage extends BasePage {
 
-  @FindBy(xpath = "//input[@id='displayname']")
+
+    @FindBy(xpath = "//div[@class='avatardiv avatardiv-shown']")
+    public WebElement accountMenu;
+
+    @FindBy(xpath = "//input[@id='displayname']")
     public WebElement profileSettingsNameBox;
 
   /*
@@ -25,8 +28,8 @@ public class Serpil_ProfileSettingsPage extends BasePage {
    */
 
 
-  @FindBy (xpath = "//h2[.='Authentication required ']")
-  public WebElement nameAuthenticationNoticeMessage;
+    @FindBy(xpath = "//h2[.='Authentication required ']")
+    public WebElement nameAuthenticationNoticeMessage;
 
     @FindBy(xpath = "//input[@id='oc-dialog-2-content-input']")
     public WebElement nameAuthenticationInputBox;
@@ -42,22 +45,35 @@ public class Serpil_ProfileSettingsPage extends BasePage {
     public WebElement phoneOptionsButton;
 
 
-@FindBy(xpath = "//strong[.='Private']")
-public WebElement phonePrivateOption;
+    @FindBy(xpath = "//input[@id='phonescope']")
+    public WebElement phoneOptionsButton2;
 
-@FindBy(xpath = "//input[@id='oc-dialog-0-content-input']")
-public WebElement phoneAuthenticationInputBox;
+    @FindBy(xpath = "//label[.='Full name']")
+    public WebElement fullNameTitle;
 
-@FindBy(xpath = "//button[.='Confirm']")
-public WebElement phoneAuthenticationConfirmButton;
 
-@FindBy (xpath = "//h2[.='Authentication required ']")
-public WebElement phoneAuthenticationNoticeMessage;
+    @FindBy(xpath = "//label[.='Email']")
+    public WebElement emailTitle;
 
+
+    @FindBy(xpath = "//label[.='Phone number']")
+    public WebElement phoneNumberTitle;
+
+    @FindBy(xpath = "//strong[.='Private']")
+    public WebElement phonePrivateOption;
+
+    @FindBy(xpath = "//input[@id='oc-dialog-0-content-input']")
+    public WebElement phoneAuthenticationInputBox;
+
+    @FindBy(xpath = "//button[.='Confirm']")
+    public WebElement phoneAuthenticationConfirmButton;
+
+    @FindBy(xpath = "//h2[.='Authentication required ']")
+    public WebElement phoneAuthenticationNoticeMessage;
 
 
     @FindBy(xpath = "//span[@id='localeexample-time']")
-  public WebElement localTime;
+    public WebElement localTime;
 
 
     /*

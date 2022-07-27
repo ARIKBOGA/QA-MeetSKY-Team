@@ -2,7 +2,6 @@ package com.meetsky.pages;
 
 import com.github.javafaker.Faker;
 import com.meetsky.utilities.Driver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,20 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 public class UploadEditDeleteFilePage {
 
 
-    public UploadEditDeleteFilePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
-
-
-    Faker faker = new Faker();
-    public String randomFolderName = faker.funnyName().name();
-    public String randomTextDocumentName = faker.funnyName().name();
     public String uploadedFileNameInTheDashboard = "selenium.png";
     public String uploadedFilePathName = "/Users/kaya/Desktop/" + uploadedFileNameInTheDashboard;
-    public String anotherRandomFolderName = faker.bothify("##??");
-    public String anotherRandomTextDocumentName = faker.bothify("##??");
-    public String otherAnotherRandomFolderName = faker.numerify("###");
-
     @FindBy(xpath = " //span[@class='icon icon-add']")
     public WebElement plusIcon;
     @FindBy(xpath = " //label[@for='file_upload_start']")
@@ -70,6 +57,15 @@ public class UploadEditDeleteFilePage {
     public WebElement deletePermanentlyButtonInActionsDropdownInDeletedFilesPage;
     @FindBy(xpath = "//span[@class='dirinfo']")
     public WebElement textShowsTotalNumberOfFoldersAndTextDocuments;
+    Faker faker = new Faker();
+    public String randomFolderName = faker.funnyName().name();
+    public String randomTextDocumentName = faker.funnyName().name();
+    public String anotherRandomFolderName = faker.bothify("##??");
+    public String anotherRandomTextDocumentName = faker.bothify("##??");
+    public String otherAnotherRandomFolderName = faker.numerify("###");
+    public UploadEditDeleteFilePage() {
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
 
 
     // public WebElement randomFolderNameInDeletedFilesPage = Driver.getDriver().findElement(By.xpath("//tr[@data-path='" + randomFolderName + "']"));

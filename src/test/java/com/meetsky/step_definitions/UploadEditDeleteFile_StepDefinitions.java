@@ -1,5 +1,6 @@
 package com.meetsky.step_definitions;
 
+import com.meetsky.pages.LoginPage;
 import com.meetsky.pages.UploadEditDeleteFilePage;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -7,31 +8,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UploadEditDeleteFile_StepDefinitions {
 
+    protected LoginPage loginPageBurak = new LoginPage();
     UploadEditDeleteFilePage uploadEditDeleteFilePage = new UploadEditDeleteFilePage();
-
-
-    @Given("the user is on the login page")
-    public void theUserIsOnTheLoginPage() {
-        Driver.getDriver().get("https://qa.meetsky.net/index.php/login");
-    }
-
-    @And("the user enters the correct credentials.")
-    public void theUserEntersTheCorrectCredentials() {
-        Driver.getDriver().get("https://qa.meetsky.net/index.php/login");
-        Driver.getDriver().findElement(By.id("user")).sendKeys("Employee21");
-        Driver.getDriver().findElement(By.id("password")).sendKeys("Employee123");
-        Driver.getDriver().findElement(By.id("submit-form")).click();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
-        wait.until(ExpectedConditions.visibilityOf(uploadEditDeleteFilePage.selectAllCheckboxInTheDashboard));
-
-
-    }
 
     @Given("user is on the Files module of MeetSky application, and dashboard page does not have any file.")
     public void userIsOnTheFilesModuleOfMeetSkyApplication() {

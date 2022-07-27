@@ -6,17 +6,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OnlineStatusFunctionality_StepDefinitions {
     OnlineStatusFunctionalityPage onlineStatusFunctionalityPage = new OnlineStatusFunctionalityPage();
-    @Given("User is logged in with valid credentials")
-    public void userIsLoggedInWithValidCredentials() {
-        Driver.getDriver().get("https://qa.meetsky.net/index.php/login");
-        Driver.getDriver().findElement(By.id("user")).sendKeys("Employee41");Driver.getDriver().findElement(By.id("password")).sendKeys("Employee123");Driver.getDriver().findElement(By.id("submit-form")).click();
-    }
 
     @Then("User goes to home page")
     public void userGoesToHomePage() {
@@ -77,7 +71,6 @@ public class OnlineStatusFunctionality_StepDefinitions {
     }
 
 
-
     @Then("the user clicks sick")
     public void theUserClicksSick() {
         onlineStatusFunctionalityPage.SickEmoji.click();
@@ -114,13 +107,13 @@ public class OnlineStatusFunctionality_StepDefinitions {
     public void userClicksTheClearStatusAfterButtonToClearTheStatusMessageAutomaticallyAndCanSetATime() {
         onlineStatusFunctionalityPage.SetStatusPage.isDisplayed();
         onlineStatusFunctionalityPage.SickEmoji.click();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);     wait.until(ExpectedConditions.elementToBeClickable(onlineStatusFunctionalityPage.ClearAtSelect));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+        wait.until(ExpectedConditions.elementToBeClickable(onlineStatusFunctionalityPage.ClearAtSelect));
 
         onlineStatusFunctionalityPage.ClearAtSelect.click();
         onlineStatusFunctionalityPage.minutes30.click();
         onlineStatusFunctionalityPage.SetStatusMessageButton.click();
     }
-
 
 
     @Then("user click set status button")

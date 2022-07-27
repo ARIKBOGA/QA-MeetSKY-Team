@@ -1,8 +1,8 @@
 @MTSK-477
 Feature: As a user, I should be able to change my online status and set a status message
 
-  Background:
-  Given User is logged in with valid credentials
+  Background: User logs in
+    Given User logs in with valid credentials "Employee41"
     Then User goes to home page
 
   @MTSK-544
