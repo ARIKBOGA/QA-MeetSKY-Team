@@ -2,8 +2,8 @@ package com.meetsky.step_definitions;
 
 import com.github.javafaker.Faker;
 import com.meetsky.pages.BasePage;
-import com.meetsky.pages.FilesBasePage;
 import com.meetsky.pages.FilesFavoritesRenameCommentPage;
+import com.meetsky.pages.FilesBasePage;
 import com.meetsky.pages.LoginPage;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
@@ -20,14 +20,15 @@ public class FilesFavoritesRenameComment_StepDefinitions {
     BasePage basePage = new BasePage();
     FilesFavoritesRenameCommentPage filesFavoritesPage = new FilesFavoritesRenameCommentPage();
 
+    public static final String userNameAhmet = "Employee44";
 
     @Given("User is logged in with valid credentials")
     public void userIsLoggedInWithValidCredentials() {
         Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
-        loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_username"));
+        loginPage.usernameBox.sendKeys(userNameAhmet);
+        //loginPage.usernameBox.sendKeys(ConfigurationReader.getProperty("valid_username"));
         loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
         loginPage.loginButton.click();
-
     }
 
     @And("user click on the three dots next to chosen file")

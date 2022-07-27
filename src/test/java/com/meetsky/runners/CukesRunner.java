@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt"
         },
 
+
         tags = "@Smoke"      // This must be assigned with Test Execution ticket number from JIRA in order to run all scenarios
         // and get their "cucumber.json" report to export to the JIRA at the end.
 
