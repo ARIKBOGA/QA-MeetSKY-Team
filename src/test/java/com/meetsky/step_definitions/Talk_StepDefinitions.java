@@ -65,7 +65,7 @@ public class Talk_StepDefinitions {
     }
 
 
-    @Then("User verify that he\\/she can see the participants of the group conversation under Participants tab")
+    @Then("User verify that he or she can see the participants of the group conversation under Participants tab")
     public void userVerifyThatHeSheCanSeeTheParticipantsOfTheGroupConversationUnderParticipantsTab() {
         Assert.assertTrue(talkPage.participantsTab.isDisplayed());
         Assert.assertTrue(talkPage.contactAdmin.isDisplayed());

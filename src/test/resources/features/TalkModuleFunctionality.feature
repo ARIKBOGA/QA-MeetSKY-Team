@@ -17,7 +17,7 @@ Feature: As a user, I should be able to create/delete conversation groups and ch
   @MTSK-539
   Scenario: User can see the participants of the conversation on the right-hand menu under Participants
     Given User clicks to {friends} group on the left side of the page
-    Then User verify that he/she can see the participants of the group conversation under Participants tab
+    Then User verify that he or she can see the participants of the group conversation under Participants tab
 
   @MTSK-540
   Scenario: User can remove any participant from the conversation as being moderator of the conversation
