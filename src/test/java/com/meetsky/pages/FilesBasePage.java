@@ -22,7 +22,4 @@ public class FilesBasePage {
     @FindBy(xpath = "//tbody/tr[1]/td[2]/a[1]/span[2]/a[2]")
     public WebElement threeDotInFavFile;
 
-    public FilesBasePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
-}
+  }
