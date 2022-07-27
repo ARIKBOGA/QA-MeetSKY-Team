@@ -136,4 +136,10 @@ public class Login_StepDefinitions {
             expectedErrorMessage = ConfigurationReader.getProperty("error_message_for_empty");
         i = a;
     }
+
+    @Given("User logs in with valid credentials {string}")
+    public void userLogsInWithValidCredentials(String username) {
+        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
+        loginPageBurak.login(username, ConfigurationReader.getProperty("valid_password"));
+    }
 }

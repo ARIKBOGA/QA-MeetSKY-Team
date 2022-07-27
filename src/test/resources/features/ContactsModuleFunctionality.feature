@@ -2,8 +2,7 @@
 Feature: As a user, I should be able to create a new contact and edit/delete any contact under Contacts module
 
   Background: User logs in
-    Given User goes to login page
-    And User logs in with valid credentials
+    Given User logs in with valid credentials "Employee155"
     Then User goes to Contacts page
 
   @MTSK-487 @Smoke
