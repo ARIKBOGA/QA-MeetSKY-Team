@@ -11,7 +11,7 @@ Feature:Profile Settings Functionality
 
 
  Background:user logs in
-   Given user logs in with valid credentials "Employee31"
+   Given User logs in with valid credentials "Employee31"
    Then user should see homepage
 
 

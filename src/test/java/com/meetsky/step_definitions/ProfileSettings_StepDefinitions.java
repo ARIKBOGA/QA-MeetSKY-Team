@@ -36,16 +36,6 @@ public class ProfileSettings_StepDefinitions implements BrowserUtils {
         Assert.assertEquals(expectedTitle, actualTitle);
     }
 
-    @Given("user logs in with valid credentials {string}")
-    public void userLogsInWithValidCredentials(String username) {
-        loginPage.usernameBox.sendKeys(username,ConfigurationReader.getProperty("valid_password"));
-
-
-
-
-    }
-
-
     @Then("user should see homepage")
     public void user_should_see_homepage() {
         String actualLink = Driver.getDriver().getCurrentUrl();
