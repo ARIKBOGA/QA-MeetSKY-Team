@@ -2,8 +2,8 @@ package com.meetsky.step_definitions;
 
 import com.github.javafaker.Faker;
 import com.meetsky.pages.BasePage;
-import com.meetsky.pages.FilesFavoritesRenameCommentPage;
 import com.meetsky.pages.FilesBasePage;
+import com.meetsky.pages.FilesFavoritesRenameCommentPage;
 import com.meetsky.pages.LoginPage;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;

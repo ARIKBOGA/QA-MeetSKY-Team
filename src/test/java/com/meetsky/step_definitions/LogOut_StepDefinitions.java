@@ -12,9 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LogOut_StepDefinitions extends BasePage {
 
+    private static final String login_page_url = ConfigurationReader.getProperty("login_page_url");
     private LoginPage loginPage = new LoginPage();
     private Login_StepDefinitions loginSteps = new Login_StepDefinitions();
-    private static final String login_page_url = ConfigurationReader.getProperty("login_page_url");
 
     @Given("User click to settings expand button on top-right corner")
     public void userClickToSettingsExpandButtonOnTopRightCorner() {

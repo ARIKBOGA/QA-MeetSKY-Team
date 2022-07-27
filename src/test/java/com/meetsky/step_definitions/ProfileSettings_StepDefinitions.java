@@ -5,7 +5,6 @@ import com.meetsky.pages.Serpil_ProfileSettingsPage;
 import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,7 +13,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.LocalDateTime;
@@ -23,8 +21,6 @@ public class ProfileSettings_StepDefinitions implements BrowserUtils {
 
     LoginPage loginPage = new LoginPage();
     Serpil_ProfileSettingsPage profileSettingsPage = new Serpil_ProfileSettingsPage();
-
-
 
 
     @Given("user is on the login page")

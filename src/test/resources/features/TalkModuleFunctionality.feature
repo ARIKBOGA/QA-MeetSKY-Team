@@ -5,7 +5,7 @@ Feature: As a user, I should be able to create/delete conversation groups and ch
     Given User logs in with valid credentials "Employee51"
     Then User goes to Talk page
 
-@MTSK-538 @Smoke
+  @MTSK-538 @Smoke
   Scenario: User can create a new group conversation by adding other users
     Given User clicks to plus sign on the left side of the page
     Given User enters the {friends} conversation name
@@ -14,12 +14,12 @@ Feature: As a user, I should be able to create/delete conversation groups and ch
     Then User clicks Create Conversetion button
     Then User verify {friends} has created
 
-@MTSK-539
+  @MTSK-539
   Scenario: User can see the participants of the conversation on the right-hand menu under Participants
-  Given User clicks to {friends} group on the left side of the page
-  Then User verify that he/she can see the participants of the group conversation under Participants tab
+    Given User clicks to {friends} group on the left side of the page
+    Then User verify that he/she can see the participants of the group conversation under Participants tab
 
-@MTSK-540
+  @MTSK-540
   Scenario: User can remove any participant from the conversation as being moderator of the conversation
     Given User clicks to {friends} group on the left side of the page
     Then User locates the participants of the group conversation under Participants tab
@@ -28,7 +28,7 @@ Feature: As a user, I should be able to create/delete conversation groups and ch
     Then User verify the participant has been succesfully removed from the group
 
 
-@MTSK-541 @Smoke
+  @MTSK-541 @Smoke
   Scenario: User can delete any group conversation previously created
     Given User clicks to three dots on the right side of the {friends}
     Then User clicks to the Delete conversation button
