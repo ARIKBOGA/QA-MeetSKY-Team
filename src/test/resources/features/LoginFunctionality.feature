@@ -1,7 +1,7 @@
 @Regression @login @MTSK-372
 Feature: As a user, I should be able to login.
 
-  @Smoke @PositiveScenario  @ValidLogin @MTSK-373
+  @PositiveScenario  @ValidLogin @MTSK-373
   Scenario Outline: User can login with valid credentials
     Given User goes to login page
     When User enters "<user name>" username

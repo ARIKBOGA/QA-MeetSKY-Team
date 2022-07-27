@@ -454,16 +454,3 @@ Feature: MeetSky login feature
     And user turns back to the dashboard
     And user refreshes the page
     Then user see total number of folders and text documents there.
-
-
-
-
-
-
-
-
-
-
-
-
-

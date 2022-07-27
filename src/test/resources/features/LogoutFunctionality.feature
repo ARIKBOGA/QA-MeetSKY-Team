@@ -2,7 +2,7 @@
 Feature: As a user, I should be able to log out.
 
 
-  @Smoke @MTSK-399
+  @MTSK-399
   Scenario: User can log out and ends up in login page
     Given User logs in with valid credentials
     Given User click to settings expand button on top-right corner

@@ -6,7 +6,7 @@ Feature:Calendar Module Functionality
     Given User logs in with valid credentials "Employee1"
     Then User should be logged in
 
-  @MTSK-557 @smoke
+  @MTSK-557 @Smoke
   Scenario: User can display daily calendar view
     Given User clicks on calendar page link
     And User clicks on action item and then daily action button

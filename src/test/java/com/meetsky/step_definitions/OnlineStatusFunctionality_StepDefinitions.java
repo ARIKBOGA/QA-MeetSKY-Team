@@ -44,7 +44,7 @@ public class OnlineStatusFunctionality_StepDefinitions {
 
     }
 
-    @And("user clicks the  button on the set status page that opens")
+    @And("user clicks the Away button on the online status page that opens")
     public void userClicksTheButtonOnTheOnlineStatusPageThatOpens() {
         onlineStatusFunctionalityPage.SetStatusPage.isDisplayed();
 
