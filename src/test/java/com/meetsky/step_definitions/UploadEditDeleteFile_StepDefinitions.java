@@ -19,12 +19,7 @@ public class UploadEditDeleteFile_StepDefinitions {
     protected LoginPage loginPageBurak = new LoginPage();
 
 
-    @Given("User logs in with valid credentials {string}")
-    public void userLogsInWithValidCredentials(String username) {
-        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
-        loginPageBurak.login(username, ConfigurationReader.getProperty("valid_password"));
-    }
-
+ 
     @Given("user is on the Files module of MeetSky application, and dashboard page does not have any file.")
     public void userIsOnTheFilesModuleOfMeetSkyApplication() {
         Assert.assertTrue(Driver.getDriver().getTitle().equals("Files - Meetsky - QA"));
