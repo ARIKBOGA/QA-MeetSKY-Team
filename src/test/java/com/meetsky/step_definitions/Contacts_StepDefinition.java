@@ -162,6 +162,7 @@ public class Contacts_StepDefinition {
 
     @Then("User should be able to see new created contact")
     public void userShouldBeAbleToSeeNewCreatedContact() {
+        BrowserUtils.waitFor(3);
         Assert.assertTrue(BrowserUtils
                 .getElementsText(contactsPage.contactsInTheMiddleColumnForText)
                 .contains(newContactName));

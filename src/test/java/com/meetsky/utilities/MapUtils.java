@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class MapUtils {
 
-
     public static List<Map<String,Object>> sortByValue(List<Map<String, Object>>listofMapUnsorted,String stringValue,Object valueToBeCompared){
         List<Map<String, Object>>sortedMap=new ArrayList<>(listofMapUnsorted);
         sortedMap.sort(Comparator.comparing((Map<String, Object> map) -> (Long) map.get(valueToBeCompared))
