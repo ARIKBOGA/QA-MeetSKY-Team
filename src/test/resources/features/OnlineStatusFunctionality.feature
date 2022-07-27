@@ -36,7 +36,7 @@ Feature: As a user, I should be able to change my online status and set a status
     And the user can set a custom status message using any emoji option
     Then the user should click on the set status message button
 
-  @MTSK-548
+  @MTSK-548 @Smoke
   Scenario: User sets status message from profile
     Given user clicks to click on the profile icon on the right side of the page
     Then User clicks on a selected exception message
