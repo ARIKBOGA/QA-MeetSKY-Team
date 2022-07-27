@@ -15,7 +15,7 @@ Feature: MeetSky login feature
     And user enters the source of file to upload and clicks okay button
     Then user should see the source of file under the Files module
 
-  @MTSK-505 @CreatingANewFolder
+  @MTSK-505 @CreatingANewFolder @Smoke
   Scenario: User can create a new folder
     Given user is on the Files module of MeetSky application, and dashboard page does not have any file.
     When user clicks the plus icon top left of the page
@@ -328,7 +328,7 @@ Feature: MeetSky login feature
     And user opens the folder
     Then user see that newly created folder and text document are there
 
-  @MTSK-525 @DeleteAFolder
+  @MTSK-525 @DeleteAFolder @Smoke
   Scenario: User can delete a folder
     Given user is on the Files module of MeetSky application, and dashboard page does not have any file.
     When user clicks the plus icon top left of the page
