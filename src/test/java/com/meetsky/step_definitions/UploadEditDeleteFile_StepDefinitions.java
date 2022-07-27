@@ -1,6 +1,8 @@
 package com.meetsky.step_definitions;
 
+import com.meetsky.pages.LoginPage;
 import com.meetsky.pages.UploadEditDeleteFilePage;
+import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -14,23 +16,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class UploadEditDeleteFile_StepDefinitions {
 
     UploadEditDeleteFilePage uploadEditDeleteFilePage = new UploadEditDeleteFilePage();
+    protected LoginPage loginPageBurak = new LoginPage();
 
 
-    @Given("the user is on the login page")
-    public void theUserIsOnTheLoginPage() {
-        Driver.getDriver().get("https://qa.meetsky.net/index.php/login");
-    }
-
-    @And("the user enters the correct credentials.")
-    public void theUserEntersTheCorrectCredentials() {
-        Driver.getDriver().get("https://qa.meetsky.net/index.php/login");
-        Driver.getDriver().findElement(By.id("user")).sendKeys("Employee21");
-        Driver.getDriver().findElement(By.id("password")).sendKeys("Employee123");
-        Driver.getDriver().findElement(By.id("submit-form")).click();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
-        wait.until(ExpectedConditions.visibilityOf(uploadEditDeleteFilePage.selectAllCheckboxInTheDashboard));
-
-
+    @Given("User logs in with valid credentials {string}")
+    public void userLogsInWithValidCredentials(String username) {
+        Driver.getDriver().get(ConfigurationReader.getProperty("login_page_url"));
+        loginPageBurak.login(username, ConfigurationReader.getProperty("valid_password"));
     }
 
     @Given("user is on the Files module of MeetSky application, and dashboard page does not have any file.")

@@ -2,9 +2,8 @@
 Feature: MeetSky login feature
   User story: As a user, I should be able to upload a file, move or delete any selected file under the Files module
 
-  Background:
-    Given the user is on the login page
-    And the user enters the correct credentials.
+  Background: User logs in
+    Given User logs in with valid credentials "Employee21"
   # Valid Username: Employee21
   # Valid Password: Employee123
 
