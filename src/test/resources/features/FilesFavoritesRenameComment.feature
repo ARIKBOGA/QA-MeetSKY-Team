@@ -5,7 +5,7 @@ Feature: As a user, I should be able to add a file to favorites, rename any file
     Given User is logged in with valid credentials
 
 
-  @MTSK-496 @Smoke
+  @MTSK-496 @smoke
   Scenario: User can add any file to favorites from its own three dots menu
     Given User clicks on Files button on top header menu
     And user click on the three dots next to chosen file
@@ -33,7 +33,7 @@ Feature: As a user, I should be able to add a file to favorites, rename any file
     Then user can see that the comment is posted
 
   @MTSK-499
-  Scenario: User can delete the comments made on any file from the the file details menu opened rigth side
+  Scenario: User can delete the comments made on any file from the the file details menu opened right side
     Given User navigates to Favorites page
     And user clicks to three dot next to Name to move to comment
     And user clicks on Details button
@@ -42,7 +42,7 @@ Feature: As a user, I should be able to add a file to favorites, rename any file
     And user clicks on Delete comment button
     Then user can see that the comment is deleted
 
-  @MTSK-500 @Smoke
+  @MTSK-500 @smoke
   Scenario: Scenario: User removes the file from favorites from its own three dots menu
     Given User navigates to Favorites page
     And user click on the three dots to removeFrom favorites

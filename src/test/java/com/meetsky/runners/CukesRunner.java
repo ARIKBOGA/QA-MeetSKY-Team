@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
                 "junit:target/cucumber-report.xml",
                 "rerun:target/rerun.txt"
         },
-        tags = "@Smoke"
+        tags = "@smoke"
 )
 
 public class CukesRunner {

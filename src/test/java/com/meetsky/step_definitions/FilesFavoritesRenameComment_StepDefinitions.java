@@ -20,7 +20,7 @@ public class FilesFavoritesRenameComment_StepDefinitions {
     BasePage basePage = new BasePage();
     FilesFavoritesRenameCommentPage filesFavoritesPage = new FilesFavoritesRenameCommentPage();
 
-    public static String userNameAhmet = "Employee44";
+    public static final String userNameAhmet = "Employee44";
 
     @Given("User is logged in with valid credentials")
     public void userIsLoggedInWithValidCredentials() {
