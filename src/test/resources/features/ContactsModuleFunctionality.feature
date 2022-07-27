@@ -20,7 +20,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
   total number of the contacts near the “All Contacts” tab
     Given User clicks to All contacts link
     Then User should be able to see all contacts in the middle column
-    Then User should be able to see the correct number near the “All Contacts” tab
+    Then User should be able to see the correct number near the "All Contacts" tab
 
   @MTSK-489
   Scenario: User can change the profile picture of any contact with a

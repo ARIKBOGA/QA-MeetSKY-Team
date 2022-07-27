@@ -62,7 +62,7 @@ public interface BrowserUtils {
             }
         }
 
-        //5. Assert:Title contains “expectedInTitle”
+        //5. Assert:Title contains "expectedInTitle"
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertTrue(actualTitle.contains(expectedInTitle));
     }

@@ -105,7 +105,7 @@ public class Contacts_StepDefinition {
         assertThat(middleColumnCount, is(equalTo(allContactsNumber)));
     }
 
-    @Then("User should be able to see the correct number near the “All Contacts” tab")
+    @Then("User should be able to see the correct number near the \"All Contacts\" tab")
     public void userShouldBeAbleToSeeTheCorrectNumberNearTheAllContactsTab() {
         int middleColumnCount = contactsPage.contactsInTheMiddleColumn.size();
         int allContactsNumber = Integer.parseInt(contactsPage.numberOfContacts.getText());
