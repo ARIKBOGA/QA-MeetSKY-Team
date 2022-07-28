@@ -177,8 +177,10 @@ public class Contacts_StepDefinition {
     public void userFillsThesePropertiesOut(DataTable table) {
         Map<String, String> inputMap = table.asMap();
 
+        selectUnselectedInputs();
+
         newContactName = inputMap.get("Fullname");
-        wait.until(ExpectedConditions.visibilityOf(contactsPage.birthdayDateInput));
+        wait.until(ExpectedConditions.visibilityOf(contactsPage.emailInput));
         contactsPage.newContactFullnameInput.clear();
         contactsPage.newContactFullnameInput.sendKeys(inputMap.get("Fullname"));
         contactsPage.companyInput.sendKeys(inputMap.get("Company"));
@@ -190,6 +192,10 @@ public class Contacts_StepDefinition {
         BrowserUtils.waitFor(2);
     }
 
+    /**
+     * Try to get a warning message from an Alert or any other element
+     * to verify the app doesn't accept invalid entering for the inputs correspondingly
+     */
     @Then("User should see warning message")
     public void userShouldSeeWarningMessage() {
         try {

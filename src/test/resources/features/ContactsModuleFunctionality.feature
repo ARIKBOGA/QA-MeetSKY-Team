@@ -2,10 +2,10 @@
 Feature: As a user, I should be able to create a new contact and edit/delete any contact under Contacts module
 
   Background: User logs in
-    Given User logs in with valid credentials "Employee155"
+    Given User logs in with valid credentials "Employee77"
     Then User goes to Contacts page
 
-  @MTSK-487 @Smoke
+  @ç @Smoke
   Scenario Outline: User can create a new contact with all properties filled with valid inputs
     Given User clicks to new contact button
     And User fills "<Full name>" "<Company>" "<Title>" "<Phone>" "<Email>" "<City>" "<Country>" properties out
