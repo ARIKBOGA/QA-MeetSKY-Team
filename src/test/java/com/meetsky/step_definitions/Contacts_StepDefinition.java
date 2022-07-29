@@ -34,8 +34,8 @@ public class Contacts_StepDefinition {
 
     @Then("User goes to Contacts page")
     public void user_goes_to_page() {
-        contactsPage.contactsPageLink.click();
-        BrowserUtils.waitFor(5);
+        contactsPage.notesPageLink.click();
+        BrowserUtils.waitFor(3);
     }
 
     @Given("User clicks to new contact button")
@@ -240,6 +240,37 @@ public class Contacts_StepDefinition {
                             element.getAttribute("title").equalsIgnoreCase(value))
                     .forEach(BrowserUtils::clickWithJS);
         });
+        BrowserUtils.waitFor(2);
+    }
+
+    @And("User fills these properties out {string}  {string}")
+    public void userFillsThesePropertiesOut(String input, String value) {
+
+        BrowserUtils.waitFor(3);
+        selectUnselectedInputs();
+
+        BrowserUtils.waitFor(3);
+        wait.until(ExpectedConditions.visibilityOf(contactsPage.emailInput));
+        contactsPage.newContactFullnameInput.clear();
+        switch ("input") {
+            case "Fullname":
+                contactsPage.newContactFullnameInput.sendKeys(value);
+                break;
+            case "Company":
+                contactsPage.companyInput.sendKeys(value);
+                break;
+            case "Title":
+                contactsPage.titleInput.sendKeys(value);
+                break;
+            case "Phone":
+            case "Email":
+                Driver.getDriver().findElement(By.xpath("(//div[contains(text(),'" + input + "')]/../following-sibling::div//input)[2]")).sendKeys(value);
+                break;
+            case "City":
+            case "Country":
+                Driver.getDriver().findElement(By.xpath("//div[contains(text(),'"+input+"')]/following-sibling::input")).sendKeys(value);
+                break;
+        }
         BrowserUtils.waitFor(2);
     }
 }

@@ -21,7 +21,7 @@ public class ContactsPage extends BasePage {
     @FindBy(id = "contact-title")
     public WebElement titleInput;
 
-    @FindBy(xpath = "//section[1]//h3//div[2]")
+    @FindBy(xpath = "//div[@class='property-masonry']//h3//div")
     public List<WebElement> presentInputs;
 
     @FindBy(xpath = "//input[@placeholder='Choose property type']")

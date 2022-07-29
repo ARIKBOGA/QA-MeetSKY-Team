@@ -21,7 +21,7 @@ public class BasePage {
     public WebElement spreedPageLink;
     @FindBy(xpath = "//a[@aria-label='Talk']")
     public WebElement talkPageLink;
-    @FindBy(xpath = "(//ul[@id='appmenu']//a)[5]")
+    @FindBy(xpath = "(//ul[@id='appmenu']//a)[7]")
     public WebElement contactsPageLink;
     @FindBy(xpath = "(//ul[@id='appmenu']//a)[6]")
     public WebElement calendarPageLink;
