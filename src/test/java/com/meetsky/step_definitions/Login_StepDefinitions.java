@@ -93,7 +93,7 @@ public class Login_StepDefinitions {
 
     @Then("User should be logged in")
     public void userShouldBeLoggedIn() {
-        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("apps/files"));
+        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("/apps/dashboard/"));
     }
 
     @Then("User should see the password in a form of dots")
