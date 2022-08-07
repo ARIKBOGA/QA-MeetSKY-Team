@@ -13,6 +13,8 @@ public class BasePage {
     public WebElement homePageLink;
     @FindBy(xpath = "//header/div[1]/ul[1]/li[1]/a[1]")
     public WebElement filesPageLink;
+    @FindBy(xpath = "//a[@href=\"/index.php/apps/files/\"]")
+    public WebElement filesPageLink2;
     @FindBy(xpath = "(//ul[@id='appmenu']//a)[2]")
     public WebElement photosPageLink;
     @FindBy(xpath = "(//ul[@id='appmenu']//a)[3]")

@@ -1,5 +1,6 @@
 package com.meetsky.step_definitions;
 
+import com.meetsky.pages.BasePage;
 import com.meetsky.pages.FilesPage;
 import com.meetsky.utilities.Driver;
 import com.meetsky.utilities.MapUtils;
@@ -254,6 +255,14 @@ public class FolderView_StepDefinitions {
         System.out.println("ActualNumbersOfSelectedFilesAndFolders = " + ActualNumbersOfSelectedFilesAndFolders);
 
         Assert.assertEquals(exptectedNumbersOfSelectedFilesAndFolders, ActualNumbersOfSelectedFilesAndFolders);
+
+    }
+
+    @Then("User clicks Files link to see files and folders")
+    public void userClicksFilesLinkToSeeFilesAndFolders() {
+        BasePage basePage=new BasePage();
+        wait.until(ExpectedConditions.elementToBeClickable( basePage.filesPageLink2));
+        basePage.filesPageLink2.click();
 
     }
 }
