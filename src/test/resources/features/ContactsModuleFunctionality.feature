@@ -13,7 +13,7 @@ Feature: As a user, I should be able to create a new contact and edit/delete any
     Examples:
       | Full name     | Company | Title   | Phone      | Email             | City   | Country |
       | Didier Drogba | Cydeo   | QA      | 8764756387 | ddrogba@gmail.com | London | England |
-      | Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |
+      ##| Muhtar Java   | Cydeo   | Teacher | 2345263767 | mjava@gmail.com   | Mclean | USA     |
 
   @MTSK-488
   Scenario: User can see all the contacts as a list inside the middle column and
