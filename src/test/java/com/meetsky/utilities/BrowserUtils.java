@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 
 public interface BrowserUtils {
 
+    static String getCurrentUrl(){
+        return Driver.getDriver().getCurrentUrl();
+    }
+
     /**
      * This method will wait throughout the given time.
      *

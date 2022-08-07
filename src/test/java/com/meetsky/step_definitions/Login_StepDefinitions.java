@@ -1,6 +1,7 @@
 package com.meetsky.step_definitions;
 
 import com.meetsky.pages.LoginPage;
+import com.meetsky.utilities.BrowserUtils;
 import com.meetsky.utilities.ConfigurationReader;
 import com.meetsky.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -93,7 +94,7 @@ public class Login_StepDefinitions {
 
     @Then("User should be logged in")
     public void userShouldBeLoggedIn() {
-        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("apps/files"));
+        Assert.assertTrue(BrowserUtils.getCurrentUrl().startsWith("https://qa.meetsky.net/index.php/apps/dashboard"));
     }
 
     @Then("User should see the password in a form of dots")
