@@ -5,7 +5,9 @@ Feature: Folder View Functionality [AutomationS4]
   Background:
     Given User goes to login page
     And User logs in with valid credentials "Employee90"
-    Then User should be logged in
+    And User should be logged in
+    Then User clicks Files link to see files and folders
+
 
   @MTSK-493
   Scenario: User can change folder view order by Name
